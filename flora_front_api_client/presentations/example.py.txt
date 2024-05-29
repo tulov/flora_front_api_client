@@ -1,0 +1,41 @@
+import marshmallow_dataclass
+from dataclasses import dataclass, field
+from typing import Optional, List
+
+from marshmallow import ValidationError
+from marshmallow.validate import Range
+from flora_front_api_client.presentations.validates import Filled, UniqueItems
+
+
+@dataclass
+class Tmp:
+    id: int = field(metadata={
+        "strict": True,  # строгая проверка типа
+        "validate": [Range(min=2, max=5)],  # валидация
+    })
+    # не обязательное поле
+    value: Optional[str] = field()
+    value2: Optional[str] = field()
+    name: str = field(default="anonymous")  # значение по умолчанию
+    arr: List[str] = field(default_factory=list, metadata={
+        "validate": [UniqueItems(), Filled()],
+        "required": True  # ОБЯЗАТЕЛЬНЫЙ СПИСОК. ИНАЧЕ НЕ РАБОТАЕТ ВАЛИДАЦИЯ
+    })  # вложенный список
+
+    # валидация на уровня всего класса
+    def __post_init__(self):
+        if not self.value and not self.value2:
+            raise ValidationError("test")
+
+
+if __name__ == '__main__':
+    data = {
+        "id": 2,
+        "arr": ["one", "two"],
+        "value": "test"
+    }
+
+    schema = marshmallow_dataclass.class_schema(Tmp)()
+    clear_data = schema.load(data)
+    print(isinstance(clear_data, Tmp))
+    print(schema.dump(clear_data))
