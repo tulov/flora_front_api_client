@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any
+from typing import Any, Dict, Union, List, Optional
 
 from marshmallow.validate import Length, OneOf
 
 from .base import BaseDataclass, SuccessResponse, PagedResponse, Querystring
 from .categories import Category
-from .enums import Currency, UnitOfWeight, UnitOfSize, UnitOfCount
+from .enums import Currency, UnitOfWeight, UnitOfSize, UnitOfCount, ProductTypes
 from .images import Image
 from .moderation import RequestForModeration
 from .tags import Tag
@@ -133,29 +133,55 @@ class FeaturedProductExecutor(BaseDataclass):
 
 
 @dataclass
+class FeaturedProductCategories(BaseDataclass):
+    id: int = field(
+        metadata={
+            "strict": True,
+        }
+    )
+
+
+@dataclass
+class Price(BaseDataclass):
+    general: Decimal
+    personal: Decimal
+
+
+@dataclass
+class RangePrice(BaseDataclass):
+    start: int
+    end: int
+    general: Decimal
+    personal: Decimal
+
+
+@dataclass
 class FeaturedProduct(BaseDataclass):
     id: int = field(
         metadata={
             "strict": True,
         }
     )
-    name: str = field(metadata={"validate": Length(max=150, min=1)})
+    type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
+    slug: str = field(metadata={"validate": Length(max=150, min=1)})
+    title: str = field(metadata={"validate": Length(max=150, min=1)})
     description: str | None = field(metadata={"validate": Length(max=1000)})
-    data: Any = field()
-    length: Decimal = field()
-    width: Decimal = field()
     height: Decimal = field()
-    size_unit: str = field(metadata={"validate": OneOf([r.value for r in UnitOfSize])})
-    weight: Decimal = field()
-    weight_unit: str = field(
-        metadata={"validate": OneOf([r.value for r in UnitOfWeight])}
-    )
-    is_concomitant_present: bool = field(default=False)
+    width: Optional[Decimal] = field()
+    properties: str = field(metadata={"validate": Length(max=20)})
+    available_condition: Decimal = field()
+    color_id: int = field(metadata={"strict": True})
+    color: str = field(metadata={"validate": Length(max=50)})
+    florist_id: int = field(metadata={"strict": True})
+
+    compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
+    categories: list[FeaturedProductCategories] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
-    executors: list[FeaturedProductExecutor] = field(
-        default_factory=list, metadata={"required": True}
-    )
-    items: list[ProductItem] | None = field(default_factory=list)
+    is_available: bool = field(default=True)
+    prices: Dict[str, Union[Price, List[RangePrice]]] = field(default_factory=dict)
+    delivery_prices: dict[str, Price] = field(default_factory=dict)
+    min_flowers: Optional[int] = field(default=None)
+    max_flowers: Optional[int] = field(default=None)
 
 
 @dataclass

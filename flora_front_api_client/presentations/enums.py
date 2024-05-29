@@ -83,6 +83,13 @@ class UnitOfSize(Enum):
 
 
 @unique
+class ProductTypes(Enum):
+    gift = "gift"
+    bouquet = "bouquet"
+    mono = "mono"
+
+
+@unique
 class UnitOfCount(Enum):
     thing = "thing"
     meter = "meter"
