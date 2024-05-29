@@ -9,31 +9,8 @@ from .enums import ImageTarget
 
 @dataclass
 class Image(BaseDataclass):
-    id: int = field(
-        metadata={
-            "strict": True,
-        }
-    )
-    position: int = field(
-        metadata={
-            "strict": True,
-        }
-    )
-    path: str = field()
-    url: str = field()
-    data: Any = field(default_factory=dict)
-    obj_id: int | None = field(
-        metadata={
-            "strict": True,
-        },
-        default=None,
-    )
-    obj_type: str | None = field(
-        metadata={
-            "validate": OneOf([r.value for r in ImageTarget]),
-        },
-        default=None,
-    )
+    id: str = field()
+    provider: str = field()
 
     def build_url(self, *, width: int, height: int):
         return f"/display?path={self.path}&w={width}&h={height}&op=resize"

@@ -132,13 +132,7 @@ class FeaturedProductExecutor(BaseDataclass):
     price: FeaturedProductPrice = field()
 
 
-@dataclass
-class FeaturedProductCategories(BaseDataclass):
-    id: int = field(
-        metadata={
-            "strict": True,
-        }
-    )
+
 
 
 @dataclass
@@ -148,7 +142,7 @@ class Price(BaseDataclass):
 
 
 @dataclass
-class RangePrice(BaseDataclass):
+class RangePrice:
     start: int
     end: int
     general: Decimal
@@ -175,11 +169,11 @@ class FeaturedProduct(BaseDataclass):
     florist_id: int = field(metadata={"strict": True})
 
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
-    categories: list[FeaturedProductCategories] | None = field(default_factory=list)
+    categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
-    prices: Dict[str, Union[Price, List[RangePrice]]] = field(default_factory=dict)
-    delivery_prices: dict[str, Price] = field(default_factory=dict)
+    prices: dict[[c for c in Currency], Union[Price, List[RangePrice]]] = field(default_factory=dict)
+    delivery_prices: dict[[c for c in Currency], Price] = field(default_factory=dict)
     min_flowers: Optional[int] = field(default=None)
     max_flowers: Optional[int] = field(default=None)
 
