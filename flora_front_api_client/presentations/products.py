@@ -172,8 +172,8 @@ class FeaturedProduct(BaseDataclass):
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
-    prices: dict[[c for c in Currency], Union[Price, List[RangePrice]]] = field(default_factory=dict)
-    delivery_prices: dict[[c for c in Currency], Price] = field(default_factory=dict)
+    prices: dict[Currency, Union[Price, List[RangePrice]]] = field(default_factory=dict)
+    delivery_prices: dict[Currency, Price] = field(default_factory=dict)
     min_flowers: Optional[int] = field(default=None)
     max_flowers: Optional[int] = field(default=None)
 
