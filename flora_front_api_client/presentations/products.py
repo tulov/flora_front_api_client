@@ -147,6 +147,22 @@ class RangePrice:
 
 
 @dataclass
+class RangePrices:
+    usd: RangePrice
+    rub: RangePrice
+    eur: RangePrice
+    kzt: RangePrice
+
+
+@dataclass
+class Prices:
+    usd: Price
+    rub: Price
+    eur: Price
+    kzt: Price
+
+
+@dataclass
 class FeaturedProduct(BaseDataclass):
     id: int = field(
         metadata={
@@ -164,13 +180,13 @@ class FeaturedProduct(BaseDataclass):
     color_id: int = field(metadata={"strict": True})
     color: str = field(metadata={"validate": Length(max=50)})
     florist_id: int = field(metadata={"strict": True})
+    delivery_prices: Prices | None = field()
 
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
-    prices: dict[Currency, Price] = field(default_factory=dict)
-    delivery_prices: Dict[Currency, Price] = field(default_factory=dict)
+    prices: Union[Prices, RangePrices] = field(default_factory=dict)
     min_flowers: Optional[int] = field(default=None)
     max_flowers: Optional[int] = field(default=None)
 
