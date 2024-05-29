@@ -132,11 +132,8 @@ class FeaturedProductExecutor(BaseDataclass):
     price: FeaturedProductPrice = field()
 
 
-
-
-
 @dataclass
-class Price(BaseDataclass):
+class Price:
     general: Decimal
     personal: Decimal
 
@@ -172,8 +169,8 @@ class FeaturedProduct(BaseDataclass):
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
-    prices: dict[Currency, Union[Price, List[RangePrice]]] = field(default_factory=dict)
-    delivery_prices: dict[Currency, Price] = field(default_factory=dict)
+    prices: dict[Currency, Price] = field(default_factory=dict)
+    delivery_prices: Dict[Currency, Price] = field(default_factory=dict)
     min_flowers: Optional[int] = field(default=None)
     max_flowers: Optional[int] = field(default=None)
 
