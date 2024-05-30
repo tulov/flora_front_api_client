@@ -181,9 +181,9 @@ class FeaturedProduct(BaseDataclass):
     color: str = field(metadata={"validate": Length(max=50)})
     florist_id: int = field(metadata={"strict": True})
     delivery_prices: Prices = field()
-    prices: Prices | RangePrices = field()
 
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
+    prices: Union[Prices, RangePrices] = field(default_factory=Prices)
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
