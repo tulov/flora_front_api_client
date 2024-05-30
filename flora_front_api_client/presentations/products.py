@@ -148,10 +148,10 @@ class RangePrice:
 
 @dataclass
 class RangePrices(BaseDataclass):
-    usd: list[RangePrice]
-    rub: list[RangePrice]
-    eur: list[RangePrice]
-    kzt: list[RangePrice]
+    usd: Price | list[RangePrice]
+    rub: Price | list[RangePrice]
+    eur: Price | list[RangePrice]
+    kzt: Price | list[RangePrice]
 
 
 @dataclass
@@ -183,7 +183,7 @@ class FeaturedProduct(BaseDataclass):
     delivery_prices: Prices = field()
 
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
-    prices: RangePrices | Prices = field(default_factory=Prices)
+    prices: RangePrices = field()
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
