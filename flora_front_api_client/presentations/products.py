@@ -148,10 +148,10 @@ class RangePrice:
 
 @dataclass
 class RangePrices:
-    usd: RangePrice
-    rub: RangePrice
-    eur: RangePrice
-    kzt: RangePrice
+    usd: list[RangePrice]
+    rub: list[RangePrice]
+    eur: list[RangePrice]
+    kzt: list[RangePrice]
 
 
 @dataclass
