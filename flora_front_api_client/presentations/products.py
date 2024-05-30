@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Dict, Union, List, Optional
+from typing import Any, Union, Optional
 
 from marshmallow.validate import Length, OneOf
 
@@ -183,7 +183,7 @@ class FeaturedProduct(BaseDataclass):
     delivery_prices: Prices = field()
 
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
-    prices: Union[RangePrices, Prices]
+    prices: RangePrices | Prices = field(default_factory=Prices)
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
