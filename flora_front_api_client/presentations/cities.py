@@ -37,7 +37,7 @@ class Country(BaseDataclass):
             "strict": True,
         }
     )
-    name: str = field(metadata={"validate": Length(max=30)})
+    name_ru: str = field(metadata={"validate": Length(max=30)})
     slug: str = field(metadata={"validate": Length(max=100)})
     capital_id: int | None = field(metadata={"strict": True})
     subcontinent: Subcontinent | None = field()
@@ -53,7 +53,7 @@ class Region(BaseDataclass):
             "strict": True,
         }
     )
-    name: str = field(metadata={"validate": Length(max=50)})
+    name_ru: str = field(metadata={"validate": Length(max=50)})
     slug: str = field(metadata={"validate": Length(max=100)})
     country: Country | None = field()
 
@@ -78,7 +78,7 @@ class City(BaseDataclass):
     parent_city_id: int | None = field(metadata={"strict": True})
     lat: Decimal = field()
     lng: Decimal = field()
-    name: str = field(metadata={"validate": Length(max=50)})
+    name_ru: str = field(metadata={"validate": Length(max=50)})
     slug: str = field(metadata={"validate": Length(max=100)})
     gmt: Decimal | None = field()
     timezone: str | None = field(metadata={"validate": Length(max=100)})
