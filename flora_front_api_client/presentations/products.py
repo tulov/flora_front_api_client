@@ -147,7 +147,7 @@ class RangePrice:
 
 
 @dataclass
-class RangePrices:
+class RangePrices(BaseDataclass):
     usd: list[RangePrice]
     rub: list[RangePrice]
     eur: list[RangePrice]
@@ -155,7 +155,7 @@ class RangePrices:
 
 
 @dataclass
-class Prices:
+class Prices(BaseDataclass):
     usd: Price
     rub: Price
     eur: Price
@@ -183,7 +183,7 @@ class FeaturedProduct(BaseDataclass):
     delivery_prices: Prices = field()
 
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
-    prices: RangePrices = field()
+    prices: Union[RangePrices, Prices] = field()
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
