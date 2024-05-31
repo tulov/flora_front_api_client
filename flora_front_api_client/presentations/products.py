@@ -140,8 +140,8 @@ class Price:
 
 @dataclass
 class RangePrice:
-    start: Optional[int]
-    end: Optional[int]
+    start: int
+    end: int
     general: Decimal
     personal: Decimal
 
@@ -156,6 +156,13 @@ class RangePrices:
 
 @dataclass
 class Prices:
+    mono: Optional[RangePrices]
+    bouquet: Optional[Price]
+    gift: Optional[Price]
+
+
+@dataclass
+class DeliveryPrices:
     usd: Price
     rub: Price
     eur: Price
@@ -180,9 +187,9 @@ class FeaturedProduct(BaseDataclass):
     color_id: int = field(metadata={"strict": True})
     color: str = field(metadata={"validate": Length(max=50)})
     florist_id: int = field(metadata={"strict": True})
-    delivery_prices: Prices
+    delivery_prices: DeliveryPrices
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
-    prices: RangePrices
+    prices: Prices
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
