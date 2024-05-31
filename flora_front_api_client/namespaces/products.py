@@ -63,11 +63,11 @@ class ProductsNamespace(Namespace):
     async def featured(
         self,
         city_id: int,
-        category: int | str,
+        # category: int | str,
         query_params: FeaturedProductsQuerystring = None,
         **kwargs,
     ) -> (int, FeaturedProductsResponse | ErrorResponse, RenewTokenResponse):
-        postfix_url = f"featured/{city_id}/{category}"
+        postfix_url = f"featured/{city_id}"
         return await self._get(
             self.build_url(query_params, postfix_url=postfix_url), **kwargs
         )
