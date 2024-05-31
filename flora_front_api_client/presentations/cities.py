@@ -88,16 +88,16 @@ class City(BaseDataclass):
     region: Region | None = field()
 
     def __str__(self):
-        s = self.name
+        s = self.name_ru
         if self.parent_city:
             if type(self.parent_city) == dict:
                 s += ", " + self.parent_city["name"]
             else:
                 s += ", " + self.parent_city.name
-        if self.region and self.region.name not in self.name:
-            s += ", " + self.region.name
+        if self.region and self.region.name_ru not in self.name_ru:
+            s += ", " + self.region.name_ru
         if self.country:
-            s += ", " + self.country.name
+            s += ", " + self.country.name_ru
         return s
 
 
