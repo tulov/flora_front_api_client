@@ -207,6 +207,7 @@ class SuccessFeaturedProductsResponse(SuccessResponse):
 
 @dataclass
 class FeaturedProductsQuerystring(Querystring):
+    city_id: int = field(default=2800)
     delivery_date: date = field(default_factory=datetime.now().date)
     promo: str | None = field(default=None)
     currency: str = field(
