@@ -147,6 +147,14 @@ class RangePrice:
 
 
 @dataclass
+class PriceWithCurrency:
+    usd: Price
+    rub: Price
+    eur: Price
+    kzt: Price
+
+
+@dataclass
 class RangePrices:
     usd: list[RangePrice]
     rub: list[RangePrice]
@@ -157,8 +165,8 @@ class RangePrices:
 @dataclass
 class Prices:
     mono: Optional[RangePrices]
-    bouquet: Optional[Price]
-    gift: Optional[Price]
+    bouquet: Optional[PriceWithCurrency]
+    gift: Optional[PriceWithCurrency]
 
 
 @dataclass
