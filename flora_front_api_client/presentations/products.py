@@ -140,18 +140,18 @@ class Price:
 
 @dataclass
 class RangePrice:
-    start: int
-    end: int
+    start: Optional[int]
+    end: Optional[int]
     general: Decimal
     personal: Decimal
 
 
 @dataclass
 class RangePrices:
-    usd: Union[Price,  list[RangePrice]]
-    rub: Union[Price, list[RangePrice]]
-    eur: Union[Price,  list[RangePrice]]
-    kzt: Union[Price,  list[RangePrice]]
+    usd: list[RangePrice]
+    rub: list[RangePrice]
+    eur: list[RangePrice]
+    kzt: list[RangePrice]
 
 
 @dataclass
