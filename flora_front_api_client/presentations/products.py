@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Union, Optional
+from typing import Any, Union, Optional, List
 
 from marshmallow.validate import Length, OneOf
 
@@ -147,15 +147,15 @@ class RangePrice:
 
 
 @dataclass
-class RangePrices(BaseDataclass):
-    usd: Price | list[RangePrice]
-    rub: Price | list[RangePrice]
-    eur: Price | list[RangePrice]
-    kzt: Price | list[RangePrice]
+class RangePrices:
+    usd: Union[Price,  list[RangePrice]]
+    rub: Union[Price, list[RangePrice]]
+    eur: Union[Price,  list[RangePrice]]
+    kzt: Union[Price,  list[RangePrice]]
 
 
 @dataclass
-class Prices(BaseDataclass):
+class Prices:
     usd: Price
     rub: Price
     eur: Price
@@ -172,18 +172,17 @@ class FeaturedProduct(BaseDataclass):
     type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
     slug: str = field(metadata={"validate": Length(max=150, min=1)})
     title: str = field(metadata={"validate": Length(max=150, min=1)})
-    description: str | None = field(metadata={"validate": Length(max=1000)})
-    height: Decimal = field()
-    width: Optional[Decimal] = field()
+    description: Optional[str] = field(metadata={"validate": Length(max=1000)})
+    height: Decimal
+    width: Optional[Decimal]
     properties: str = field(metadata={"validate": Length(max=20)})
-    available_condition: Decimal = field()
+    available_condition: Decimal
     color_id: int = field(metadata={"strict": True})
     color: str = field(metadata={"validate": Length(max=50)})
     florist_id: int = field(metadata={"strict": True})
-    delivery_prices: Prices = field()
-
+    delivery_prices: Prices
     compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
-    prices: RangePrices = field()
+    prices: RangePrices
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
