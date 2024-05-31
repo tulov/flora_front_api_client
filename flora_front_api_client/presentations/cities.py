@@ -37,7 +37,7 @@ class Country(BaseDataclass):
             "strict": True,
         }
     )
-    name_ru: str = field(metadata={"validate": Length(max=30)})
+    name: str = field(metadata={"validate": Length(max=30)})
     slug: str = field(metadata={"validate": Length(max=100)})
     capital_id: int | None = field(metadata={"strict": True})
     subcontinent: Subcontinent | None = field()
@@ -53,7 +53,7 @@ class Region(BaseDataclass):
             "strict": True,
         }
     )
-    name_ru: str = field(metadata={"validate": Length(max=50)})
+    name: str = field(metadata={"validate": Length(max=50)})
     slug: str = field(metadata={"validate": Length(max=100)})
     country: Country | None = field()
 
@@ -78,7 +78,7 @@ class City(BaseDataclass):
     parent_city_id: int | None = field(metadata={"strict": True})
     lat: Decimal = field()
     lng: Decimal = field()
-    name_ru: str = field(metadata={"validate": Length(max=50)})
+    name: str = field(metadata={"validate": Length(max=50)})
     slug: str = field(metadata={"validate": Length(max=100)})
     gmt: Decimal | None = field()
     timezone: str | None = field(metadata={"validate": Length(max=100)})
@@ -88,16 +88,16 @@ class City(BaseDataclass):
     region: Region | None = field()
 
     def __str__(self):
-        s = self.name_ru
+        s = self.name
         if self.parent_city:
             if type(self.parent_city) == dict:
                 s += ", " + self.parent_city["name"]
             else:
                 s += ", " + self.parent_city.name
-        if self.region and self.region.name_ru not in self.name_ru:
-            s += ", " + self.region.name_ru
+        if self.region and self.region.name not in self.name:
+            s += ", " + self.region.name
         if self.country:
-            s += ", " + self.country.name_ru
+            s += ", " + self.country.name
         return s
 
 
