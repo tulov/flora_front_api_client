@@ -5,6 +5,7 @@ from marshmallow.validate import OneOf
 
 from .base import BaseDataclass, SuccessResponse
 from .enums import ImageTarget
+import cloudinary
 
 
 @dataclass

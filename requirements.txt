@@ -70,3 +70,5 @@ yarl==1.8.2
     #   aiohttp
 aiobreaker==1.2.0
 typeguard
+
+cloudinary==1.40.0
