@@ -7,17 +7,16 @@ from .base import BaseDataclass, SuccessResponse
 from .enums import ImageTarget
 import cloudinary
 
-from ..client import FloraApiClient
-
 
 @dataclass
 class Image(BaseDataclass):
     id: str = field()
     provider: str = field()
 
-    def build_url(self, client: FloraApiClient, *, width: int, height: int):
+    def build_url(self, *, width: int, height: int):
+        from ..client import FloraApiClient
         cloudinary.config(
-            cloud_name=client.cloudinary_cloud_name,
+            cloud_name=FloraApiClient.cloudinary_cloud_name,
         )
         options = {
             'width': width,
@@ -26,8 +25,8 @@ class Image(BaseDataclass):
         url = cloudinary.CloudinaryImage(self.id).build_url(**options)
         return url
 
-    def full_url(self, *, client: FloraApiClient, width: int, height: int) -> str:
-        return self.build_url(client, width=width, height=height)
+    def full_url(self, *, width: int, height: int) -> str:
+        return self.build_url(width=width, height=height)
 
     @property
     def mime_type(self) -> str:
