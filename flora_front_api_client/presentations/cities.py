@@ -13,7 +13,7 @@ from .base import SuccessResponse, BaseDataclass, PagedResponse
 class Continent(BaseDataclass):
     id: int = field(metadata={"strict": True})
     iso: str = field(metadata={"validate": Length(equal=2)})
-    name: str = field(metadata={"validate": Length(max=30)})
+    name_ru: str = field(metadata={"validate": Length(max=30)})
     slug: str = field(metadata={"validate": Length(max=100)})
 
 
@@ -22,7 +22,7 @@ class Subcontinent(BaseDataclass):
     id: int = field(metadata={"strict": True})
     continent_id: int = field(metadata={"strict": True})
     iso: str = field(metadata={"validate": Length(equal=3)})
-    name: str = field(metadata={"validate": Length(max=30)})
+    name_ru: str = field(metadata={"validate": Length(max=30)})
     slug: str = field(metadata={"validate": Length(max=100)})
     continent: Continent | None = field()
 
@@ -37,7 +37,7 @@ class Country(BaseDataclass):
             "strict": True,
         }
     )
-    name: str = field(metadata={"validate": Length(max=30)})
+    name_ru: str = field(metadata={"validate": Length(max=30)})
     slug: str = field(metadata={"validate": Length(max=100)})
     capital_id: int | None = field(metadata={"strict": True})
     subcontinent: Subcontinent | None = field()
@@ -53,7 +53,7 @@ class Region(BaseDataclass):
             "strict": True,
         }
     )
-    name: str = field(metadata={"validate": Length(max=50)})
+    name_ru: str = field(metadata={"validate": Length(max=50)})
     slug: str = field(metadata={"validate": Length(max=100)})
     country: Country | None = field()
 
@@ -78,7 +78,7 @@ class City(BaseDataclass):
     parent_city_id: int | None = field(metadata={"strict": True})
     lat: Decimal = field()
     lng: Decimal = field()
-    name: str = field(metadata={"validate": Length(max=50)})
+    name_ru: str = field(metadata={"validate": Length(max=50)})
     slug: str = field(metadata={"validate": Length(max=100)})
     gmt: Decimal | None = field()
     timezone: str | None = field(metadata={"validate": Length(max=100)})
@@ -88,16 +88,16 @@ class City(BaseDataclass):
     region: Region | None = field()
 
     def __str__(self):
-        s = self.name
+        s = self.name_ru
         if self.parent_city:
             if type(self.parent_city) == dict:
-                s += ", " + self.parent_city["name"]
+                s += ", " + self.parent_city["name_ru"]
             else:
-                s += ", " + self.parent_city.name
-        if self.region and self.region.name not in self.name:
-            s += ", " + self.region.name
+                s += ", " + self.parent_city.name_ru
+        if self.region and self.region.name_ru not in self.name_ru:
+            s += ", " + self.region.name_ru
         if self.country:
-            s += ", " + self.country.name
+            s += ", " + self.country.name_ru
         return s
 
 

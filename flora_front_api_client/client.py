@@ -71,9 +71,11 @@ class FloraApiClient:
         app_key: str,
         host: str,
         url_prefix: str = "/api/v1",
+        cloudinary_cloud_name: str,
         circuit_breaker_fail_max: int = 10,
         circuit_breaker_timeout_minutes: int = 3,
     ):
+        FloraApiClient.cloudinary_cloud_name = cloudinary_cloud_name
         signer = Singer(private_key=app_key, public_key=app_id)
         breaker = CircuitBreaker(
             fail_max=circuit_breaker_fail_max,

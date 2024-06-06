@@ -5,45 +5,28 @@ from marshmallow.validate import OneOf
 
 from .base import BaseDataclass, SuccessResponse
 from .enums import ImageTarget
+import cloudinary
 
 
 @dataclass
 class Image(BaseDataclass):
-    id: int = field(
-        metadata={
-            "strict": True,
-        }
-    )
-    position: int = field(
-        metadata={
-            "strict": True,
-        }
-    )
-    path: str = field()
-    url: str = field()
-    data: Any = field(default_factory=dict)
-    obj_id: int | None = field(
-        metadata={
-            "strict": True,
-        },
-        default=None,
-    )
-    obj_type: str | None = field(
-        metadata={
-            "validate": OneOf([r.value for r in ImageTarget]),
-        },
-        default=None,
-    )
+    id: str = field()
+    provider: str = field()
 
     def build_url(self, *, width: int, height: int):
-        return f"/display?path={self.path}&w={width}&h={height}&op=resize"
+        from ..client import FloraApiClient
+        cloudinary.config(
+            cloud_name=FloraApiClient.cloudinary_cloud_name,
+        )
+        options = {
+            'width': width,
+            'height': height,
+        }
+        url = cloudinary.CloudinaryImage(self.id).build_url(**options)
+        return url
 
     def full_url(self, *, width: int, height: int) -> str:
-        r = self.url.split("/", 3)
-        url = self.build_url(width=width, height=height)
-        if len(r) < 3:
-            return url
-        return "/".join(r[:3]) + url
+        return self.build_url(width=width, height=height)
 
     @property
     def mime_type(self) -> str:
