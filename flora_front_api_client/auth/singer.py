@@ -1,7 +1,5 @@
 from collections.abc import Mapping
-from hashlib import sha256
 from typing import Any
-from urllib.parse import unquote
 
 
 def _add(res: dict[str, Any], key: str, k, v):
@@ -45,15 +43,4 @@ class Singer:
         self.public_key = public_key
 
     def get_sign(self, body: Mapping) -> str:
-        # все словари и массивы приводим к одномерному виду
-        params = inline(body)
-        # сортируем и конкатенируем значения
-        concatenated_values = "".join(
-            [
-                unquote(params[k]) if k == "url" else params[k]
-                for k in sorted(params.keys())
-            ]
-        )
-        concatenated_values = f"{self.private_key}{concatenated_values}"
-        # вычисляем хеш sha256
-        return sha256(concatenated_values.encode()).hexdigest()
+        return self.private_key[0]
