@@ -7,7 +7,6 @@ from marshmallow.validate import Length, OneOf, Range
 from .base import SuccessResponse, BaseDataclass, PagedResponse
 from .enums import Currency
 from .fields import Field, Relationship
-from .tags import Tag
 
 
 @dataclass
@@ -17,15 +16,13 @@ class Category(BaseDataclass):
             "strict": True,
         }
     )
-    name: str = field(metadata={"validate": Length(max=150, min=1)})
+    name_ru: str = field(metadata={"validate": Length(max=150, min=1)})
     parent_id: int | None = field(
         metadata={
             "strict": True,
         }
     )
     slug: str = field(metadata={"validate": Length(max=100, min=1)})
-    return_percent: int = field(metadata={"validate": Range(min=0, max=100)})
-    data: Any = field()
     is_visible: bool = field(default=True)
     weight: int = field(default=0)
     fields: list[Field] | None = field(default_factory=list)
