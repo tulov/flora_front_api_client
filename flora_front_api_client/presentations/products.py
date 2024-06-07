@@ -36,7 +36,6 @@ class ProductBaseDataclass(BaseDataclass):
     weight_unit: str = field(
         metadata={"validate": OneOf([r.value for r in UnitOfWeight])}
     )
-    type: ProductTypes = field()
 
 
 @dataclass
@@ -66,6 +65,7 @@ class Product(ProductBaseDataclass):
     tags: list[Tag] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     items: list[ProductItem] | None = field(default_factory=list)
+    type: ProductTypes = field()
 
     @property
     def main_image(self) -> Image | None:
