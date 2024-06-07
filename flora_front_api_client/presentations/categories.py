@@ -28,7 +28,6 @@ class Category(BaseDataclass):
     data: Any = field()
     is_visible: bool = field(default=True)
     weight: int = field(default=0)
-    tags: list[Tag] | None = field(default_factory=list)
     fields: list[Field] | None = field(default_factory=list)
 
 

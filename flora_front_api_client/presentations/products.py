@@ -36,6 +36,7 @@ class ProductBaseDataclass(BaseDataclass):
     weight_unit: str = field(
         metadata={"validate": OneOf([r.value for r in UnitOfWeight])}
     )
+    type: ProductTypes = field()
 
 
 @dataclass
