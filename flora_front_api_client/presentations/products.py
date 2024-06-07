@@ -58,7 +58,6 @@ class DeliveryPrices:
     kzt: Price
 
 
-
 @dataclass
 class ProductBaseDataclass(BaseDataclass):
     name: str = field(metadata={"validate": Length(max=150, min=1)})
@@ -77,10 +76,9 @@ class ProductBaseDataclass(BaseDataclass):
     weight_unit: str = field(
         metadata={"validate": OneOf([r.value for r in UnitOfWeight])}
     )
-    type: ProductTypes = field()
+    type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
     prices: Prices
     delivery_prices: DeliveryPrices
-
 
 
 @dataclass
@@ -131,7 +129,6 @@ class Product(ProductBaseDataclass):
     is_template: bool = field(default=False)
     images: list[Image] | None = field(default_factory=list)
     categories: List[Category] | None = field(default_factory=list)
-
 
     @property
     def main_image(self) -> Image | None:
@@ -270,5 +267,3 @@ class DeliveryTimePeriodRequest(BaseDataclass):
     city_id: int = field(metadata={"strict": True})
     delivery_date: date = field()
     ids: list[int] = field()
-
-
