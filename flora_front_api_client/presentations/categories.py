@@ -16,7 +16,7 @@ class Category(BaseDataclass):
             "strict": True,
         }
     )
-    name_ru: str = field(metadata={"validate": Length(max=150, min=1)})
+    name: str = field(metadata={"validate": Length(max=150, min=1)})
     parent_id: int | None = field(
         metadata={
             "strict": True,
