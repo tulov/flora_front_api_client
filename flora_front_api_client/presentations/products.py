@@ -60,7 +60,6 @@ class DeliveryPrices:
 
 @dataclass
 class ProductBaseDataclass(BaseDataclass):
-    categories: list[Category]
     name: str = field(metadata={"validate": Length(max=150, min=1)})
     description: str | None = field(metadata={"validate": Length(max=1000)})
     data: Any | None = field()
@@ -80,6 +79,8 @@ class ProductBaseDataclass(BaseDataclass):
     type: ProductTypes = field()
     prices: Prices
     delivery_prices: DeliveryPrices
+    categories: Optional[List[Category]] = None
+
 
 
 @dataclass
