@@ -58,6 +58,7 @@ class DeliveryPrices:
     kzt: Price
 
 
+
 @dataclass
 class ProductBaseDataclass(BaseDataclass):
     name: str = field(metadata={"validate": Length(max=150, min=1)})
@@ -79,7 +80,6 @@ class ProductBaseDataclass(BaseDataclass):
     type: ProductTypes = field()
     prices: Prices
     delivery_prices: DeliveryPrices
-    categories: Optional[List[Category]] = None
 
 
 
@@ -126,11 +126,12 @@ class Product(ProductBaseDataclass):
         }
     )
 
-    category: Category | None = field()
     request_for_moderation: RequestForModeration | None = field()
 
     is_template: bool = field(default=False)
     images: list[Image] | None = field(default_factory=list)
+    categories: List[Category] | None = field(default_factory=list)
+
 
     @property
     def main_image(self) -> Image | None:
