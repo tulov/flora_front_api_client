@@ -76,6 +76,7 @@ class ProductBaseDataclass(BaseDataclass):
     prices: Prices
     delivery_prices: DeliveryPrices
 
+
 @dataclass
 class ProductItem(BaseDataclass):
     id: int | None = field()
@@ -128,6 +129,8 @@ class Product(ProductBaseDataclass):
     height: Optional[Decimal] = field(default=None)
     width: Optional[Decimal] = field(default=None)
     weight: Optional[Decimal] = field(default=None)
+    min_flowers: Optional[Decimal] = field(default=None)
+    max_flowers: Optional[Decimal] = field(default=None)
 
     @property
     def main_image(self) -> Image | None:
