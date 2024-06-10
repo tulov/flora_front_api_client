@@ -68,17 +68,17 @@ class ProductBaseDataclass(BaseDataclass):
             "strict": True,
         }
     )
-    length: Decimal = field()
-    height: Decimal = field()
-    width: Decimal = field()
     size_unit: str = field(metadata={"validate": OneOf([r.value for r in UnitOfSize])})
-    weight: Decimal = field()
     weight_unit: str = field(
         metadata={"validate": OneOf([r.value for r in UnitOfWeight])}
     )
     type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
     prices: Prices
     delivery_prices: DeliveryPrices
+    length: Optional[Decimal] = field(default=None)
+    height: Optional[Decimal] = field(default=None)
+    width: Optional[Decimal] = field(default=None)
+    weight: Optional[Decimal] = field(default=None)
 
 
 @dataclass
