@@ -75,11 +75,6 @@ class ProductBaseDataclass(BaseDataclass):
     type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
     prices: Prices
     delivery_prices: DeliveryPrices
-    length: Optional[Decimal] = field(default=None)
-    height: Optional[Decimal] = field(default=None)
-    width: Optional[Decimal] = field(default=None)
-    weight: Optional[Decimal] = field(default=None)
-
 
 @dataclass
 class ProductItem(BaseDataclass):
@@ -129,6 +124,10 @@ class Product(ProductBaseDataclass):
     is_template: bool = field(default=False)
     images: list[Image] | None = field(default_factory=list)
     categories: List[Category] | None = field(default_factory=list)
+    length: Optional[Decimal] = field(default=None)
+    height: Optional[Decimal] = field(default=None)
+    width: Optional[Decimal] = field(default=None)
+    weight: Optional[Decimal] = field(default=None)
 
     @property
     def main_image(self) -> Image | None:
