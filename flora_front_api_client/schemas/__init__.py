@@ -22,7 +22,6 @@ from .auth import (
     EnterCodeRequestSchema,
     AuthCodeRequestSchema,
 )
-from .counters import CountersResponseSchema
 from .base import (
     SuccessResponseSchema,
     QuerystringSchema,
@@ -31,29 +30,12 @@ from .base import (
     DataRequestSchema,
     RevisionRequestSchema,
 )
-from .moderation import (
-    RequestsForModerationResponseSchema,
-    RequestForModerationResponseSchema,
-    ModerationUpdateRequestSchema,
-)
 from .categories import (
     CategoryResponseSchema,
     CreateCategoryRequestSchema,
     CategoriesResponseSchema,
     FilterCounterResponseSchema,
     FilterCounterRequestSchema,
-)
-from .tags import (
-    TagResponseSchema,
-    TagsResponseSchema,
-    CreateTagRequestSchema,
-    TagsTreeResponseSchema,
-)
-from .fields import (
-    FieldResponseSchema,
-    FieldsResponseSchema,
-    CreateFieldRequestSchema,
-    RelationshipSchema,
 )
 from .images import ImageResponseSchema, ImageUploadRequestSchema
 from .products import (
@@ -68,18 +50,6 @@ from .products import (
     IdsFeaturedProductsQuerystringSchema,
 )
 from .cities import CitiesResponseSchema, CityResponseSchema, SearchCitiesResponseSchema
-from .prices import (
-    PricesResponseSchema,
-    PriceResponseSchema,
-    PricesRequestSchema,
-    PricesCurrentQuerystringSchema,
-    PricesCurrentResponseSchema,
-)
-from .programs import (
-    ProgramResponseSchema,
-    ProgramsResponseSchema,
-    ProgramRequestSchema,
-)
 
 from .menu import MenuResponseSchema, MenuRequestSchema, MenuQuerystringSchema
 from .slider import (
@@ -97,14 +67,6 @@ from .orders import (
     OrderBillRequestSchema,
     OrderBillResponseSchema,
     AfterRejectRequestBodySchema,
-)
-from .bills import (
-    BillResponseSchema,
-    BillsResponseSchema,
-    BillPayRequestSchema,
-    CloudpaymentsBillPayRequestSchema,
-    CloudpaymentsBillAfter3dRequestSchema,
-    BillPDFResponseSchema,
 )
 
 DATE_FORMAT = "%Y-%m-%d"
@@ -128,26 +90,15 @@ __all__ = (
     SuccessResponseSchema,
     RenewTokenResponseSchema,
     RenewTokenRequestSchema,
-    CountersResponseSchema,
     UsersResponseSchema,
     QuerystringSchema,
-    RequestsForModerationResponseSchema,
-    RequestForModerationResponseSchema,
     WithFieldsQuerystringSchema,
-    ModerationUpdateRequestSchema,
     SendRestoreAccessLinkRequestSchema,
     RestoreAccessRequestSchema,
     ChangePasswordRequestSchema,
     CategoryResponseSchema,
     CreateCategoryRequestSchema,
     CategoriesResponseSchema,
-    TagResponseSchema,
-    CreateTagRequestSchema,
-    TagsResponseSchema,
-    FieldsResponseSchema,
-    FieldResponseSchema,
-    CreateFieldRequestSchema,
-    RelationshipSchema,
     ImageResponseSchema,
     ImageUploadRequestSchema,
     ProductResponseSchema,
@@ -156,17 +107,10 @@ __all__ = (
     CitiesResponseSchema,
     CityResponseSchema,
     BindCityRequestSchema,
-    PricesResponseSchema,
-    PriceResponseSchema,
-    PricesRequestSchema,
-    ProgramsResponseSchema,
-    ProgramRequestSchema,
-    ProgramResponseSchema,
     FeaturedProductsQuerystringSchema,
     MenuResponseSchema,
     MenuRequestSchema,
     MenuQuerystringSchema,
-    TagsTreeResponseSchema,
     SliderResponseSchema,
     SliderItemRequestSchema,
     SliderItemResponseSchema,
@@ -177,18 +121,10 @@ __all__ = (
     CreateOrderRequestSchema,
     OrderResponseSchema,
     OrdersResponseSchema,
-    BillResponseSchema,
-    BillsResponseSchema,
-    BillPayRequestSchema,
-    CloudpaymentsBillPayRequestSchema,
     ResultResponseSchema,
-    CloudpaymentsBillAfter3dRequestSchema,
-    BillPDFResponseSchema,
     DataRequestSchema,
     AuthCodeRequestSchema,
     EnterCodeRequestSchema,
-    PricesCurrentQuerystringSchema,
-    PricesCurrentResponseSchema,
     OrderCommentResponseSchema,
     OrderCommentRequestSchema,
     OrderBillRequestSchema,

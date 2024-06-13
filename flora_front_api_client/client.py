@@ -4,31 +4,20 @@ from flora_front_api_client.namespaces import (
     UsersNamespace,
     AuthNamespace,
     InfoNamespace,
-    PartnersNamespace,
     DataForAuthNamespace,
-    CountersNamespace,
-    ModerationNamespace,
     CategoriesNamespace,
-    TagsNamespace,
-    FieldsNamespace,
     ImagesNamespace,
     ProductsNamespace,
     CitiesNamespace,
-    PricesNamespace,
-    ProgramsNamespace,
     MenuNamespace,
     SliderItemsNamespace,
     OrdersNamespace,
-    BillsNamespace,
     PromoCodesNamespace,
     AnswersNamespace,
-    ChatsNamespace,
     MainPageNamespace,
     CallbacksNamespace,
     FullTextSearchNamespace,
     OccasionsNamespace,
-    BookkeepingNamespace,
-    TodoNamespace,
 )
 from aiobreaker import CircuitBreaker
 from datetime import timedelta
@@ -38,31 +27,20 @@ class FloraApiClient:
     users: UsersNamespace
     auth: AuthNamespace
     info: InfoNamespace
-    partners: PartnersNamespace
     data_for_auth: DataForAuthNamespace
-    counters: CountersNamespace
-    moderation: ModerationNamespace
     categories: CategoriesNamespace
-    tags: TagsNamespace
-    fields: FieldsNamespace
     images: ImagesNamespace
     products: ProductsNamespace
     cities: CitiesNamespace
-    prices: PricesNamespace
-    programs: ProgramsNamespace
     menu: MenuNamespace
     slider_items: SliderItemsNamespace
     orders: OrdersNamespace
-    bills: BillsNamespace
     promos: PromoCodesNamespace
     answers: AnswersNamespace
-    chats: ChatsNamespace
     main_page: MainPageNamespace
     callbacks: CallbacksNamespace
     full_text_search: FullTextSearchNamespace
     occasions: OccasionsNamespace
-    bookkeeping: BookkeepingNamespace
-    todo: TodoNamespace
 
     def __init__(
         self,
