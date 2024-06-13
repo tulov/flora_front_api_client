@@ -8,9 +8,6 @@ from .users import (
     ConfirmDataForAuthRequestSchema,
     UsersResponseSchema,
     ChangePasswordRequestSchema,
-    BindCityRequestSchema,
-    PartnerSettingsRequestSchema,
-    PartnerSettingsResponseSchema,
 )
 from .auth import (
     AuthRequestSchema,
@@ -106,7 +103,6 @@ __all__ = (
     ProductRequestSchema,
     CitiesResponseSchema,
     CityResponseSchema,
-    BindCityRequestSchema,
     FeaturedProductsQuerystringSchema,
     MenuResponseSchema,
     MenuRequestSchema,
@@ -129,8 +125,6 @@ __all__ = (
     OrderCommentRequestSchema,
     OrderBillRequestSchema,
     OrderBillResponseSchema,
-    PartnerSettingsRequestSchema,
-    PartnerSettingsResponseSchema,
     AfterRejectRequestBodySchema,
     RevisionRequestSchema,
     FilterCounterResponseSchema,
