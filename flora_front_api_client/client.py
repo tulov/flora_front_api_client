@@ -18,6 +18,7 @@ from flora_front_api_client.namespaces import (
     CallbacksNamespace,
     FullTextSearchNamespace,
     OccasionsNamespace,
+    SubscribesNamespace,
 )
 from aiobreaker import CircuitBreaker
 from datetime import timedelta
@@ -41,6 +42,7 @@ class FloraApiClient:
     callbacks: CallbacksNamespace
     full_text_search: FullTextSearchNamespace
     occasions: OccasionsNamespace
+    subscribers: SubscribesNamespace
 
     def __init__(
         self,
