@@ -28,5 +28,10 @@ class SubscribeCreateRequest(BaseDataclass):
 
 
 @dataclass
+class SubscribeConfirmRequest(BaseDataclass):
+    token: str = field(metadata={"validate": Length(max=100)})
+
+
+@dataclass
 class SubscribeResponse(SuccessResponse):
     result: Subscribe = field()
