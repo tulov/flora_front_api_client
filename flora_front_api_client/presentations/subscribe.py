@@ -1,4 +1,3 @@
-from datetime import datetime
 from dataclasses import dataclass, field
 
 from marshmallow.validate import Length, Email
@@ -14,7 +13,6 @@ class Subscribe(BaseDataclass):
         }
     )
     email: str = field(metadata={"validate": Email()})
-    created_at: datetime = field()
 
     def __hash__(self):
         return hash(self.id) if self.id else hash(self.email)
