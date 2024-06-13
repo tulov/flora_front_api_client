@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Union, Optional, List
+from typing import Any
 
 from marshmallow.validate import Length, OneOf
 
@@ -9,8 +9,6 @@ from .base import BaseDataclass, SuccessResponse, PagedResponse, Querystring
 from .categories import Category
 from .enums import Currency, UnitOfWeight, UnitOfSize, UnitOfCount, ProductTypes
 from .images import Image
-from .moderation import RequestForModeration
-from .tags import Tag
 
 
 @dataclass
@@ -45,9 +43,9 @@ class RangePrices:
 
 @dataclass
 class Prices:
-    mono: Optional[RangePrices]
-    bouquet: Optional[PriceWithCurrency]
-    gift: Optional[PriceWithCurrency]
+    mono: RangePrices | None
+    bouquet: PriceWithCurrency | None
+    gift: PriceWithCurrency | None
 
 
 @dataclass
@@ -120,17 +118,15 @@ class Product(ProductBaseDataclass):
         }
     )
 
-    request_for_moderation: RequestForModeration | None = field()
-
     is_template: bool = field(default=False)
     images: list[Image] | None = field(default_factory=list)
-    categories: List[Category] | None = field(default_factory=list)
-    length: Optional[Decimal] = field(default=None)
-    height: Optional[Decimal] = field(default=None)
-    width: Optional[Decimal] = field(default=None)
-    weight: Optional[Decimal] = field(default=None)
-    min_flowers: Optional[Decimal] = field(default=None)
-    max_flowers: Optional[Decimal] = field(default=None)
+    categories: list[Category] | None = field(default_factory=list)
+    length: Decimal | None = field(default=None)
+    height: Decimal | None = field(default=None)
+    width: Decimal | None = field(default=None)
+    weight: Decimal | None = field(default=None)
+    min_flowers: Decimal | None = field(default=None)
+    max_flowers: Decimal | None = field(default=None)
 
     @property
     def main_image(self) -> Image | None:
@@ -187,22 +183,22 @@ class FeaturedProduct(BaseDataclass):
     type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
     slug: str = field(metadata={"validate": Length(max=150, min=1)})
     title: str = field(metadata={"validate": Length(max=150, min=1)})
-    description: Optional[str] = field(metadata={"validate": Length(max=1000)})
+    description: str | None = field(metadata={"validate": Length(max=1000)})
     height: Decimal
-    width: Optional[Decimal]
+    width: Decimal | None
     properties: str = field(metadata={"validate": Length(max=20)})
     available_condition: Decimal
     color_id: int = field(metadata={"strict": True})
     color: str = field(metadata={"validate": Length(max=50)})
     florist_id: int = field(metadata={"strict": True})
     delivery_prices: DeliveryPrices
-    compound: Optional[str] = field(metadata={"validate": Length(max=1000)})
+    compound: str | None = field(metadata={"validate": Length(max=1000)})
     prices: Prices
     categories: list[int] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
-    min_flowers: Optional[int] = field(default=None)
-    max_flowers: Optional[int] = field(default=None)
+    min_flowers: int | None = field(default=None)
+    max_flowers: int | None = field(default=None)
 
 
 @dataclass
