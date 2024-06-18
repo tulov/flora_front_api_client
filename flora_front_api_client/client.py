@@ -42,7 +42,7 @@ class FloraApiClient:
     callbacks: CallbacksNamespace
     full_text_search: FullTextSearchNamespace
     occasions: OccasionsNamespace
-    subscribers: SubscribesNamespace
+    subscribes: SubscribesNamespace
 
     def __init__(
         self,
