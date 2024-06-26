@@ -7,13 +7,11 @@ from marshmallow.validate import Length, OneOf, Range
 
 from .base import SuccessResponse, BaseDataclass, PagedResponse
 from .bills import Bill
-from .bookkeeping import BookkeepingRow
 from .cities import City, Country
 from .enums import OrderState
 from .images import Image
 from .products import Product
 from .users import User
-from .todo import Todo
 
 
 @dataclass
@@ -98,8 +96,6 @@ class Order(BaseDataclass):
     children: list[Any] | None = field(default_factory=list)
     comments: list[OrderComment] | None = field(default_factory=list)
     photos_before_delivery: list[Image] | None = field(default_factory=list)
-    bookkeeping: list[BookkeepingRow] | None = field(default_factory=list)
-    todos: list[Todo] | None = field(default_factory=list)
     answer: Answer | None = field(default=None)
     _max_time_for_accept: datetime | None = field(default=None)
 

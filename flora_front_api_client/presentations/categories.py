@@ -1,12 +1,10 @@
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Any
 
 from marshmallow.validate import Length, OneOf, Range
 
 from .base import SuccessResponse, BaseDataclass, PagedResponse
 from .enums import Currency
-from .fields import Field, Relationship
 
 
 @dataclass
@@ -25,7 +23,6 @@ class Category(BaseDataclass):
     slug: str = field(metadata={"validate": Length(max=100, min=1)})
     is_visible: bool = field(default=True)
     weight: int = field(default=0)
-    fields: list[Field] | None = field(default_factory=list)
 
 
 @dataclass
@@ -42,7 +39,6 @@ class CreateCategoryRequest(BaseDataclass):
     is_visible: bool | None = field(default=None)
     weight: int = field(default=0)
     tags: list[int] | None = field(default_factory=list)
-    fields: list[Relationship] | None = field(default_factory=list)
 
 
 @dataclass
