@@ -97,9 +97,6 @@ class PricesRequest(BaseDataclass):
 @dataclass
 class CurrentPriceData(BaseDataclass):
     product_id: int = field(metadata={"strict": True})
-    executors: list[FeaturedProductExecutor] = field(
-        default_factory=list, metadata={"required": True}
-    )
 
 
 @dataclass
