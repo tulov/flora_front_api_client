@@ -291,6 +291,10 @@ class User(BaseDataclass):
         }
     )
     contacts: Contacts | None = field(default=None)
+    gender: str | None = field(
+        default=None, metadata={"validate": OneOf([r.value for r in Genders])}
+    )
+    birthday: str | None = field(default=None)
     data: UserData = field(default_factory=UserData)
     data_for_auth: list[DataForAuth] | None = field(default_factory=list)
     roles: list[str] = field(
