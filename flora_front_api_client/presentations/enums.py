@@ -170,8 +170,9 @@ class PaymentTypes(Enum):
 
 @unique
 class Genders(Enum):
-    man = "man"
-    woman = "woman"
+    m = "m"
+    w = "w"
+    n = "n"
 
 
 @unique
