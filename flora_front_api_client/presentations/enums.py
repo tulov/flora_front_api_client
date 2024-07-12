@@ -108,16 +108,18 @@ class UnitOfTime(Enum):
 
 @unique
 class OrderState(Enum):
-    new = "new"
-    payed = "payed"
-    rejected = "rejected"
-    accepted = "accepted"
-    surcharge_required = "surcharge_required"
-    on_delivery = "on_delivery"
+    paid = "paid"
     delivered = "delivered"
     closed = "closed"
-    claim = "claim"
-    canceled = "canceled"
+    accepted = "accepted"
+    transferred = "transferred"
+    confirmed = "confirmed"
+    canceled_return = "canceled_return"
+    canceled_part_holden = "canceled_part_holden"
+    canceled_all_holden = "canceled_all_holden"
+    on_delivery = "on_delivery"
+    on_map = "on_map"
+    bringo = "bringo"
 
 
 @unique
@@ -148,6 +150,13 @@ class CommunicationTransports(Enum):
     sms = "sms"
     telegram = "telegram"
     email = "email"
+
+
+@unique
+class OrderTypes(Enum):
+    normal = "normal"
+    phone = "phone"
+    florist = "florist"
 
 
 @unique
