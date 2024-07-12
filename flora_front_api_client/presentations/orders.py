@@ -73,6 +73,7 @@ class Order(BaseDataclass):
     delivery_date: date = field()
     delivery_time: int = field(metadata={"strict": True})
     receiver_name: str = field(metadata={"validate": Length(max=150)})
+    receiver_city: str = field(metadata={"validate": Length(max=150)})
     receiver_phone: str = field(metadata={"validate": Length(max=100)})
     delivery_address: str = field(metadata={"validate": Length(max=1000)})
     card_text: str = field(metadata={"validate": Length(max=1000)})
