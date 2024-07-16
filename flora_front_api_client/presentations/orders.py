@@ -17,21 +17,25 @@ from .users import User
 @dataclass
 class OrderProduct(BaseDataclass):
     product_id: int = field(metadata={"strict": True})
-    cnt: int = field(metadata={"strict": True})
+    count: int = field(metadata={"strict": True})
 
 
 @dataclass
 class OrderItem(OrderProduct):
     order_id: int = field(metadata={"strict": True})
     product_id: int = field(metadata={"strict": True})
-    cnt: int = field(metadata={"strict": True})
+    count: int = field(metadata={"strict": True})
     price: Decimal = field()
-    currency: str = field(metadata={"validate": Length(equal=3)})
-    provider_id: int = field(metadata={"strict": True})
-    data: Any = field()
-    product: Product | None = field(default=None)
-    provider: User | None = field(default=None)
-    photos_before_delivery: list[Image] | None = field(default_factory=list)
+    color_id: int = field(metadata={"strict": True})
+    discount: int = field(metadata={"strict": True})
+    discount_sum: Decimal = field(metadata={"strict": True})
+    object: str = field(metadata={"strict": True})
+    flower_count: int = field(metadata={"strict": True})
+    # provider_id: int = field(metadata={"strict": True})
+    # data: Any = field()
+    # product: Product | None = field(default=None)
+    # provider: User | None = field(default=None)
+    # photos_before_delivery: list[Image] | None = field(default_factory=list)
 
 
 @dataclass
