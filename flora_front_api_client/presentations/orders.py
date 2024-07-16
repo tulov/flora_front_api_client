@@ -27,7 +27,6 @@ class OrderItem(OrderProduct):
     product_parent_id: int = field(metadata={"strict": True})
     count: int = field(metadata={"strict": True})
     price: Decimal = field()
-    color_id: int = field(metadata={"strict": True})
     discount: int = field(metadata={"strict": True})
     discount_sum: Decimal = field(metadata={"strict": True})
     object: str = field(metadata={"strict": True})
