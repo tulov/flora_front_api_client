@@ -129,7 +129,7 @@ class Order(BaseDataclass):
     # user: User | None = field(default=None)
     # bills: list[Bill] | None = field(default_factory=list)
     # is_complicated: bool | None = field(default=False)
-    # items: list[OrderItem] | None = field(default_factory=list)
+    items: list[OrderItem] | None = field(default_factory=list)
     # children: list[Any] | None = field(default_factory=list)
     # comments: list[OrderComment] | None = field(default_factory=list)
     # photos_before_delivery: list[Image] | None = field(default_factory=list)
