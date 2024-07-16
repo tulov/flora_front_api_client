@@ -24,6 +24,7 @@ class OrderProduct(BaseDataclass):
 class OrderItem(OrderProduct):
     order_id: int = field(metadata={"strict": True})
     product_id: int = field(metadata={"strict": True})
+    product_parent_id: int = field(metadata={"strict": True})
     count: int = field(metadata={"strict": True})
     price: Decimal = field()
     color_id: int = field(metadata={"strict": True})
