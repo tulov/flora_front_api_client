@@ -71,7 +71,7 @@ class Answer(BaseDataclass):
 class Order(BaseDataclass):
     id: int = field(metadata={"strict": True})
     app_id: int = field(metadata={"strict": True})
-    guid: str = field()
+    # guid: str = field()
     type: str = field(metadata={"validate": OneOf([r.value for r in OrderTypes])})
     # parent_id: int | None = field(metadata={"strict": True})
     currency_id: int | None = field(metadata={"strict": True})
@@ -110,6 +110,8 @@ class Order(BaseDataclass):
     delivery_cost: Decimal | None = field()
     total_rub: Decimal | None = field()
     tech: str | None = field(default=None)
+    items: list[OrderItem] | None = field(default_factory=list)
+
     # order_datetime: datetime = field()
     # delivery_date: date = field()
     # delivery_time: int = field(metadata={"strict": True})
@@ -129,7 +131,6 @@ class Order(BaseDataclass):
     # user: User | None = field(default=None)
     # bills: list[Bill] | None = field(default_factory=list)
     # is_complicated: bool | None = field(default=False)
-    items: list[OrderItem] | None = field(default_factory=list)
     # children: list[Any] | None = field(default_factory=list)
     # comments: list[OrderComment] | None = field(default_factory=list)
     # photos_before_delivery: list[Image] | None = field(default_factory=list)
