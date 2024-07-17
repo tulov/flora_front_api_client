@@ -21,11 +21,11 @@ def expectations(*, schema, expected_code=HTTPStatus.OK):
             )
             if type(sch) == OrderResponseSchema:
                 o = sch.load(res, unknown=EXCLUDE)
-                order_schema = OrderSchema()
-                for i in range(0, len(o.result.children)):
-                    o.result.children[i] = order_schema.load(
-                        o.result.children[i], unknown=EXCLUDE
-                    )
+                # order_schema = OrderSchema()
+                # for i in range(0, len(o.result.children)):
+                #     o.result.children[i] = order_schema.load(
+                #         o.result.children[i], unknown=EXCLUDE
+                #     )
                 return code, o, tokens
             return code, sch.load(res, unknown=EXCLUDE), tokens
 
