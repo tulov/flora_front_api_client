@@ -53,6 +53,14 @@ class OrderComment(OrderCommentBase):
 
 
 @dataclass
+class OrderInvoices(BaseDataclass):
+    key: str | None = field(metadata={"validate": Length(max=64)})
+    cost: Decimal = field()
+    created: int = field()
+    order_id: int = field(metadata={"strict": True})
+
+
+@dataclass
 class Answer(BaseDataclass):
     rating: int | None = field(
         metadata={"strict": True, "validate": Range(min=1, max=5)}, default=None
@@ -111,6 +119,7 @@ class Order(BaseDataclass):
     total_rub: Decimal | None = field()
     tech: str | None = field(default=None)
     items: list[OrderItem] | None = field(default_factory=list)
+    order_invoices: list[OrderInvoices] | None = field(default_factory=list)
 
     # order_datetime: datetime = field()
     # delivery_date: date = field()
@@ -199,12 +208,7 @@ class CreateOrderRequest(BaseDataclass):
     )
 
 
-@dataclass
-class OrderInvoices(BaseDataclass):
-    key: str | None = field(metadata={"validate": Length(max=64)})
-    cost: Decimal = field()
-    created: int = field()
-    order_id: int = field(metadata={"strict": True})
+
 
 @dataclass
 class OrderResponse(SuccessResponse):
