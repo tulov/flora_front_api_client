@@ -200,6 +200,13 @@ class CreateOrderRequest(BaseDataclass):
 
 
 @dataclass
+class OrderInvoices(BaseDataclass):
+    key: str | None = field(metadata={"validate": Length(max=64)})
+    cost: Decimal = field()
+    created: int = field()
+    order_id: int = field(metadata={"strict": True})
+
+@dataclass
 class OrderResponse(SuccessResponse):
     result: Order = field()
 
