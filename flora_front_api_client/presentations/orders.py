@@ -118,6 +118,8 @@ class Order(BaseDataclass):
     creator_id: int = field(metadata={"strict": True})
     delivery_cost: Decimal | None = field()
     total_rub: Decimal | None = field()
+    photo_before_send: int | 0 = field()
+    wishes: str | None = field(default='')
     tech: str | None = field(default=None)
     items: list[OrderItem] | None = field(default_factory=list)
     order_invoices: list[OrderInvoices] | None = field(default_factory=list)
@@ -207,8 +209,6 @@ class CreateOrderRequest(BaseDataclass):
     products: list[OrderProduct] = field(
         default_factory=list, metadata={"required": True}
     )
-
-
 
 
 @dataclass
