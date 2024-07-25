@@ -127,7 +127,7 @@ class Product(ProductBaseDataclass):
     weight: Decimal | None = field(default=None)
     min_flowers: Decimal | None = field(default=None)
     max_flowers: Decimal | None = field(default=None)
-    items: list[ProductItem] | None = field(default_factory=list)
+    # items: list[ProductItem] | None = field(default_factory=list)
 
     @property
     def main_image(self) -> Image | None:
