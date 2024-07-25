@@ -71,8 +71,8 @@ class ProductBaseDataclass(BaseDataclass):
         metadata={"validate": OneOf([r.value for r in UnitOfWeight])}
     )
     type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
-    prices: Prices
-    delivery_prices: DeliveryPrices
+    prices: Prices | None
+    delivery_prices: DeliveryPrices | None
 
 
 @dataclass

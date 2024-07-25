@@ -31,7 +31,7 @@ class OrderItem(OrderProduct):
     discount_sum: Decimal = field(metadata={"strict": True})
     object: str = field(metadata={"strict": True})
     flower_count: int = field(metadata={"strict": True})
-
+    product: Product = field()
     # provider_id: int = field(metadata={"strict": True})
     # data: Any = field()
     # provider: User | None = field(default=None)
