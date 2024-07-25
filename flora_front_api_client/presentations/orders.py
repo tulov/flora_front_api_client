@@ -32,10 +32,6 @@ class OrderItem(OrderProduct):
     object: str = field(metadata={"strict": True})
     flower_count: int = field(metadata={"strict": True})
     product: Product | None = field(default_factory=list)
-    # provider_id: int = field(metadata={"strict": True})
-    # data: Any = field()
-    # provider: User | None = field(default=None)
-    # photos_before_delivery: list[Image] | None = field(default_factory=list)
 
 
 @dataclass
@@ -79,10 +75,9 @@ class Answer(BaseDataclass):
 class Order(BaseDataclass):
     id: int = field(metadata={"strict": True})
     app_id: int = field(metadata={"strict": True})
-    # guid: str = field()
     type: str = field(metadata={"validate": OneOf([r.value for r in OrderTypes])})
-    # parent_id: int | None = field(metadata={"strict": True})
     currency_id: int | None = field(metadata={"strict": True})
+    currency: str | None = field()
     user_id: int | None = field(metadata={"strict": True})
     summ: Decimal | None = field()
     summ_manual: Decimal | None = field()
@@ -122,30 +117,6 @@ class Order(BaseDataclass):
     items: list[OrderItem] | None = field(default_factory=list)
     order_invoices: list[OrderInvoices] | None = field(default_factory=list)
 
-    # order_datetime: datetime = field()
-    # delivery_date: date = field()
-    # delivery_time: int = field(metadata={"strict": True})
-    # card_text: str = field(metadata={"validate": Length(max=1000)})
-    # take_photo_with_receiver: bool = field()
-    # provider_id: int = field(metadata={"strict": True})
-    # state: str = field(metadata={"validate": OneOf([r.value for r in OrderState])})
-    # promo_code: str = field(metadata={"validate": Length(max=100)})
-    # amount: Decimal = field()
-    # currency: str = field(metadata={"validate": Length(equal=3)})
-    # revision: int = field(metadata={"strict": True})
-    # data: Any = field(default_factory=dict)
-    # answer_id: int | None = field(metadata={"strict": True}, default=None)
-    # city: City | None = field(default=None)
-    # country: Country | None = field(default=None)
-    # provider: User | None = field(default=None)
-    # user: User | None = field(default=None)
-    # bills: list[Bill] | None = field(default_factory=list)
-    # is_complicated: bool | None = field(default=False)
-    # children: list[Any] | None = field(default_factory=list)
-    # comments: list[OrderComment] | None = field(default_factory=list)
-    # photos_before_delivery: list[Image] | None = field(default_factory=list)
-    # answer: Answer | None = field(default=None)
-    # _max_time_for_accept: datetime | None = field(default=None)
 
     @property
     def not_send_photos(self) -> list[Image]:
