@@ -21,17 +21,18 @@ class OrderProduct(BaseDataclass):
 
 
 @dataclass
-class OrderItem(OrderProduct):
-    order_id: int = field(metadata={"strict": True})
-    product_id: int = field(metadata={"strict": True})
-    product_parent_id: int = field(metadata={"strict": True})
-    count: int = field(metadata={"strict": True})
-    price: Decimal = field()
-    discount: int = field(metadata={"strict": True})
-    discount_sum: Decimal = field(metadata={"strict": True})
-    object: str = field(metadata={"strict": True})
-    flower_count: int = field(metadata={"strict": True})
-    product: Product | None = field(default_factory=list)
+class OrderItem(BaseDataclass):
+    cnt: int = field(metadata={"strict": True})
+    product: list[Product]
+    # order_id: int = field(metadata={"strict": True})
+    # product_id: int = field(metadata={"strict": True})
+    # product_parent_id: int = field(metadata={"strict": True})
+    # price: Decimal = field()
+    # discount: int = field(metadata={"strict": True})
+    # discount_sum: Decimal = field(metadata={"strict": True})
+    # object: str = field(metadata={"strict": True})
+    # flower_count: int = field(metadata={"strict": True})
+    # product: Product | None = field(default_factory=list)
 
 
 @dataclass
