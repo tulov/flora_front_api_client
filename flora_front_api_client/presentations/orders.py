@@ -23,7 +23,7 @@ class OrderProduct(BaseDataclass):
 @dataclass
 class OrderItem(BaseDataclass):
     cnt: int = field(metadata={"strict": True})
-    product: list[Product]
+    product: Product
     # order_id: int = field(metadata={"strict": True})
     # product_id: int = field(metadata={"strict": True})
     # product_parent_id: int = field(metadata={"strict": True})
