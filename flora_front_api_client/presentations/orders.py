@@ -120,7 +120,7 @@ class Order(BaseDataclass):
     wishes: str | None = field(default='')
     currency: str | None = field(default='rub')
     tech: str | None = field(default=None)
-    items: list[OrderItem] | None = field(default_factory=list)
+    items: list[OrderData] | None = field(default_factory=list)
     order_invoices: list[OrderInvoices] | None = field(default_factory=list)
 
 
