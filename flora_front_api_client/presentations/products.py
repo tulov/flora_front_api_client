@@ -234,6 +234,7 @@ class IdsFeaturedProductsQuerystring(BaseDataclass):
     currency: str = field(
         metadata={"validate": OneOf([r.value for r in Currency])}, default="rub"
     )
+    type: str | None = field
 
 
 @dataclass
