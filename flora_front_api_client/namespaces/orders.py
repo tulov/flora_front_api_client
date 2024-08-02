@@ -58,6 +58,13 @@ class OrdersNamespace(Namespace):
     ) -> (int, OrderResponse | ErrorResponse, RenewTokenResponse):
         return await self._get(self.build_url(query_params, postfix_url=id_), **kwargs)
 
+    @expectations(schema=OrderResponseSchema)
+    async def last_delivery_orders(
+        self,
+        **kwargs,
+    ) -> (int, OrderResponse | ErrorResponse, RenewTokenResponse):
+        return await self._get(self.build_url(postfix_url='/last_delivery_orders'), **kwargs)
+
     @expectations(schema=OrdersResponseSchema)
     async def all(
         self, query_params: Querystring = None, **kwargs
