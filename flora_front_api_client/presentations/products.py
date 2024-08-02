@@ -217,6 +217,21 @@ class SuccessFeaturedProductsResponse(SuccessResponse):
 
 
 @dataclass
+class LastDeliveryProductsResponse(SuccessResponse):
+    result: list = field()
+
+
+@dataclass
+class LastDeliveryProductsRequest(BaseDataclass):
+    title: str = field(metadata={"validate": Length(max=150, min=1)})
+    city: str = field(metadata={"validate": Length(max=150, min=1)})
+    date: str = field(metadata={"validate": Length(max=150, min=1)})
+    product_id: int = field()
+    data: Any = field(metadata={"validate": Length(max=1000)})
+
+
+
+@dataclass
 class FeaturedProductsQuerystring(Querystring):
     delivery_date: date = field(default_factory=datetime.now().date)
     promo: str | None = field(default=None)

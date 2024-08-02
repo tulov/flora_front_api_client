@@ -45,6 +45,7 @@ from .products import (
     PreferredExecutorQuerystringSchema,
     SuccessFeaturedProductsResponseSchema,
     IdsFeaturedProductsQuerystringSchema,
+    LastDeliveryProductsResponseSchema
 )
 from .cities import CitiesResponseSchema, CityResponseSchema, SearchCitiesResponseSchema
 
@@ -131,4 +132,5 @@ __all__ = (
     FilterCounterRequestSchema,
     FeaturedProductsResponseSchema,
     SearchCitiesResponseSchema,
+    LastDeliveryProductsResponseSchema
 )
