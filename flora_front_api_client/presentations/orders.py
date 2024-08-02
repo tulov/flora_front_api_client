@@ -68,6 +68,7 @@ class Answer(BaseDataclass):
         metadata={"strict": True, "validate": Range(min=1, max=5)}, default=None
     )
     id: int | None = field(metadata={"strict": True}, default=None)
+    name: str | None = field(default=None)
     created_at: datetime = field(default_factory=datetime.utcnow)
     txt: str | None = field(default=None)
     is_checked: bool = field(default=False)
