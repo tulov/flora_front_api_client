@@ -122,6 +122,7 @@ class Order(BaseDataclass):
     tech: str | None = field(default=None)
     items: list[OrderData] | None = field(default_factory=list)
     order_invoices: list[OrderInvoices] | None = field(default_factory=list)
+    answer: Answer | None = field(default=None)
 
 
     @property
