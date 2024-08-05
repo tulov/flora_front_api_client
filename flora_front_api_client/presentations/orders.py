@@ -198,7 +198,7 @@ class LastDeliveryOrders(BaseDataclass):
 
 @dataclass
 class LastDeliveryOrdersResponse(SuccessResponse):
-    result: LastDeliveryOrders = field()
+    result: list[LastDeliveryOrders] = field()
 
 
 @dataclass
