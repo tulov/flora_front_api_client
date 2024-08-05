@@ -193,6 +193,7 @@ class LastDeliveryOrders(BaseDataclass):
     city: str = field(metadata={"validate": Length(max=150, min=1)})
     date: str = field(metadata={"validate": Length(max=150, min=1)})
     product_id: int = field()
+    image: Image | None = field()
 
 
 @dataclass
