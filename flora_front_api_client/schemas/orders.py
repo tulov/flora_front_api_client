@@ -1,5 +1,6 @@
 import marshmallow_dataclass
 from flora_front_api_client.presentations.orders import (
+    LastDeliveryOrdersResponse,
     CreateOrderRequest,
     OrderResponse,
     OrdersResponse,
@@ -26,6 +27,9 @@ OrderCommentRequestSchema = marshmallow_dataclass.class_schema(OrderCommentReque
 OrderCommentResponseSchema = marshmallow_dataclass.class_schema(OrderCommentResponse)
 OrderBillResponseSchema = marshmallow_dataclass.class_schema(OrderBillResponse)
 OrderBillRequestSchema = marshmallow_dataclass.class_schema(OrderBillRequest)
+LastDeliveryOrdersResponseSchema = marshmallow_dataclass.class_schema(
+    LastDeliveryOrdersResponse
+)
 AfterRejectRequestBodySchema = marshmallow_dataclass.class_schema(
     AfterRejectRequestBody
 )

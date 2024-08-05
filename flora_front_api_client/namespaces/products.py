@@ -18,8 +18,6 @@ from ..presentations.products import (
     SuccessFeaturedProductsResponse,
     DeliveryTimePeriodResponse,
     DeliveryTimePeriodRequest,
-    LastDeliveryProductsRequest,
-    LastDeliveryProductsResponse,
 )
 from ..schemas import (
     ProductResponseSchema,
@@ -28,7 +26,6 @@ from ..schemas import (
     PreferredExecutorResponseSchema,
     SuccessFeaturedProductsResponseSchema,
     FilterCounterResponseSchema,
-    LastDeliveryProductsResponseSchema
 )
 from ..schemas.products import DeliveryTimePeriodResponseSchema
 
@@ -142,10 +139,3 @@ class ProductsNamespace(Namespace):
             **kwargs,
         )
 
-    @expectations(schema=LastDeliveryProductsResponseSchema)
-    async def last_delivery_products(
-        self, data: LastDeliveryProductsRequest, **kwargs
-    ) -> (int, LastDeliveryProductsResponse | ErrorResponse, RenewTokenResponse):
-        return await self._get(
-            self.build_url(postfix_url="last-delivery-products"), **kwargs
-        )

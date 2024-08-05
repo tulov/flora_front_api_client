@@ -14,6 +14,7 @@ from ..presentations.base import (
 )
 from ..presentations.error import ErrorResponse
 from ..presentations.orders import (
+    LastDeliveryOrdersResponse,
     OrderResponse,
     CreateOrderRequest,
     OrdersResponse,
@@ -37,6 +38,7 @@ from ..schemas import (
 from ..schemas.orders import (
     OrderAnswerResponseSchema,
     CancelOrderCalculationResponseSchema,
+    LastDeliveryOrdersResponseSchema,
 )
 
 
@@ -58,11 +60,11 @@ class OrdersNamespace(Namespace):
     ) -> (int, OrderResponse | ErrorResponse, RenewTokenResponse):
         return await self._get(self.build_url(query_params, postfix_url=id_), **kwargs)
 
-    @expectations(schema=OrderResponseSchema)
+    @expectations(schema=LastDeliveryOrdersResponseSchema)
     async def last_delivery_orders(
         self,
         **kwargs,
-    ) -> (int, OrderResponse | ErrorResponse, RenewTokenResponse):
+    ) -> (int, LastDeliveryOrdersResponse | ErrorResponse):
         return await self._get(self.build_url(postfix_url='/last_delivery_orders'), **kwargs)
 
     @expectations(schema=OrdersResponseSchema)

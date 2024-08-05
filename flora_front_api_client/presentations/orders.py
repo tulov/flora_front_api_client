@@ -125,7 +125,6 @@ class Order(BaseDataclass):
     order_invoices: list[OrderInvoices] | None = field(default_factory=list)
     answer: Answer | None = field(default=None)
 
-
     @property
     def not_send_photos(self) -> list[Image]:
         return [
@@ -186,6 +185,20 @@ class CreateOrderRequest(BaseDataclass):
     products: list[OrderProduct] = field(
         default_factory=list, metadata={"required": True}
     )
+
+
+@dataclass
+class LastDeliveryOrders(BaseDataclass):
+    title: str = field(metadata={"validate": Length(max=150, min=1)})
+    city: str = field(metadata={"validate": Length(max=150, min=1)})
+    date: str = field(metadata={"validate": Length(max=150, min=1)})
+    product_id: int = field()
+    data: Any = field(metadata={"validate": Length(max=1000)})
+
+
+@dataclass
+class LastDeliveryOrdersResponse(SuccessResponse):
+    result: LastDeliveryOrders = field()
 
 
 @dataclass

@@ -45,7 +45,6 @@ from .products import (
     PreferredExecutorQuerystringSchema,
     SuccessFeaturedProductsResponseSchema,
     IdsFeaturedProductsQuerystringSchema,
-    LastDeliveryProductsResponseSchema
 )
 from .cities import CitiesResponseSchema, CityResponseSchema, SearchCitiesResponseSchema
 
@@ -65,6 +64,7 @@ from .orders import (
     OrderBillRequestSchema,
     OrderBillResponseSchema,
     AfterRejectRequestBodySchema,
+    LastDeliveryOrdersResponseSchema
 )
 
 DATE_FORMAT = "%Y-%m-%d"
@@ -132,5 +132,5 @@ __all__ = (
     FilterCounterRequestSchema,
     FeaturedProductsResponseSchema,
     SearchCitiesResponseSchema,
-    LastDeliveryProductsResponseSchema
+    LastDeliveryOrdersResponseSchema
 )
