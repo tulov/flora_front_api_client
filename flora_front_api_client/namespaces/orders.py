@@ -65,7 +65,7 @@ class OrdersNamespace(Namespace):
         self,
         **kwargs,
     ) -> (int, LastDeliveryOrdersResponse | ErrorResponse):
-        return await self._get(self.build_url(postfix_url='/last_delivery_orders'), **kwargs)
+        return await self._get(self.build_url(postfix_url='last_delivery_orders'), **kwargs)
 
     @expectations(schema=OrdersResponseSchema)
     async def all(
