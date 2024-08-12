@@ -217,6 +217,16 @@ class SuccessFeaturedProductsResponse(SuccessResponse):
 
 
 @dataclass
+class CityWithProductCnt(BaseDataclass):
+    city: str = field(metadata={"validate": Length(max=150, min=1)})
+    product_cnt: int = field(metadata={"validate": Length(max=20)})
+
+
+@dataclass
+class CityWithProductCntResponse(SuccessResponse):
+    result: list[CityWithProductCnt] = field()
+
+@dataclass
 class FeaturedProductsQuerystring(Querystring):
     delivery_date: date = field(default_factory=datetime.now().date)
     promo: str | None = field(default=None)

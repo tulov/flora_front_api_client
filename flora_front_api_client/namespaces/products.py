@@ -17,7 +17,7 @@ from ..presentations.products import (
     IdsFeaturedProductsQuerystring,
     SuccessFeaturedProductsResponse,
     DeliveryTimePeriodResponse,
-    DeliveryTimePeriodRequest,
+    DeliveryTimePeriodRequest, CityWithProductCntResponse,
 )
 from ..schemas import (
     ProductResponseSchema,
@@ -27,7 +27,7 @@ from ..schemas import (
     SuccessFeaturedProductsResponseSchema,
     FilterCounterResponseSchema,
 )
-from ..schemas.products import DeliveryTimePeriodResponseSchema
+from ..schemas.products import DeliveryTimePeriodResponseSchema, CityWithProductCntResponseSchema
 
 
 class ProductsNamespace(Namespace):
@@ -71,6 +71,13 @@ class ProductsNamespace(Namespace):
         return await self._get(
             self.build_url(query_params, postfix_url=postfix_url), **kwargs
         )
+
+    @expectations(schema=CityWithProductCntResponseSchema)
+    async def city_with_product_cnt(
+        self,
+        **kwargs,
+    ) -> (int, CityWithProductCntResponse | ErrorResponse):
+        return await self._get(self.build_url(postfix_url='city_with_product_cnt'), **kwargs)
 
     @expectations(schema=PreferredExecutorResponseSchema)
     async def preferred_executor(
@@ -138,4 +145,3 @@ class ProductsNamespace(Namespace):
             json=data.as_dict(),
             **kwargs,
         )
-

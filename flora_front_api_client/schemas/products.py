@@ -14,6 +14,7 @@ from flora_front_api_client.presentations.products import (
     FeaturedProductExecutor,
     DeliveryTimePeriodResponse,
     DeliveryTimePeriodRequest,
+    CityWithProductCntResponse
 )
 from marshmallow import Schema, EXCLUDE
 
@@ -25,6 +26,9 @@ ProductsResponseSchema = marshmallow_dataclass.class_schema(ProductsResponse)
 ProductRequestSchema = marshmallow_dataclass.class_schema(ProductRequest)
 FeaturedProductsResponseSchema = marshmallow_dataclass.class_schema(
     FeaturedProductsResponse
+)
+CityWithProductCntResponseSchema = marshmallow_dataclass.class_schema(
+    CityWithProductCntResponse
 )
 FeaturedProductsQuerystringSchema = marshmallow_dataclass.class_schema(
     FeaturedProductsQuerystring
