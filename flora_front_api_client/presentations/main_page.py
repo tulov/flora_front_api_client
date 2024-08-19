@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Dict, Any
 
 from marshmallow.validate import Length
 
@@ -28,3 +29,11 @@ class MainPage(BaseDataclass):
 @dataclass
 class MainPageResponse(SuccessResponse):
     result: MainPage = field()
+
+
+@dataclass
+class PopularCitiesBlock(BaseDataclass):
+    id: int = field(metadata={"strict": True})
+    created: int = field()
+    data: Dict[str, Any] = field(default_factory=dict)
+
