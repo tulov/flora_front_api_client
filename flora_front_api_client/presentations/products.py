@@ -219,6 +219,11 @@ class SuccessFeaturedProductsResponse(SuccessResponse):
 
 @dataclass
 class CityWithProductCnt(BaseDataclass):
+    id: int = field(
+        metadata={
+            "strict": True,
+        }
+    )
     city: str = field(metadata={"validate": Length(max=150, min=1)})
     product_cnt: int = field()
 
