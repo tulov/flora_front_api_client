@@ -127,6 +127,7 @@ class Product(ProductBaseDataclass):
     weight: Decimal | None = field(default=None)
     min_flowers: Decimal | None = field(default=None)
     max_flowers: Decimal | None = field(default=None)
+
     # items: list[ProductItem] | None = field(default_factory=list)
 
     @property
@@ -219,12 +220,13 @@ class SuccessFeaturedProductsResponse(SuccessResponse):
 @dataclass
 class CityWithProductCnt(BaseDataclass):
     city: str = field(metadata={"validate": Length(max=150, min=1)})
-    product_cnt: int = field(metadata={"validate": Length(max=20)})
+    product_cnt: int = field()
 
 
 @dataclass
 class CityWithProductCntResponse(SuccessResponse):
     result: list[CityWithProductCnt] = field()
+
 
 @dataclass
 class FeaturedProductsQuerystring(Querystring):
