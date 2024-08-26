@@ -24,6 +24,7 @@ class OrderProduct(BaseDataclass):
 class OrderData(BaseDataclass):
     cnt: int = field(metadata={"strict": True})
     product: Product
+    flowers_cnt: int = field(default=0)
 
 
 @dataclass
