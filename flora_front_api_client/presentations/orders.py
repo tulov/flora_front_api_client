@@ -16,7 +16,7 @@ from .users import User
 
 @dataclass
 class OrderProduct(BaseDataclass):
-    product_id: int = field(metadata={"strict": True})
+    product_id: str = field(metadata={"strict": True})
     count: int = field(metadata={"strict": True})
 
 
