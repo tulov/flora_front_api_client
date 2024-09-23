@@ -284,6 +284,7 @@ class User(BaseDataclass):
     currency: str = field(metadata={"validate": Length(equal=3)})
     is_moderated: bool = field()
     banned: bool = field()
+    phone: str | None = field()
     percent_us: int = field(
         metadata={
             "strict": True,
