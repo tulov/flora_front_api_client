@@ -1,31 +1,22 @@
 from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Any
 
 from marshmallow.validate import Length, OneOf
 
 from .base import SuccessResponse, BaseDataclass, PagedResponse
-from .enums import PromoTypes
+from .enums import PromoTypes, PromoWorkPeriod
 
 
 @dataclass
 class PromoCode(BaseDataclass):
+    id: int = field(metadata={"strict": True,})
     code: str = field(metadata={"validate": Length(max=30)})
+    discount: int =field()
+    work_days: str = field(metadata={"validate": OneOf([p.value for p in PromoWorkPeriod])})
     type: str = field(metadata={"validate": OneOf([r.value for r in PromoTypes])})
-    is_valid: bool = field()
-    data: dict[str, Any] = field(default_factory=dict)
-    created_at: datetime | None = field(default=None)
-
-    def check(self) -> bool:
-        if not self.is_valid:
-            return False
-        if "period" in self.data and self.data["period"]:
-            cur_date = datetime.now().date()
-            arr = self.data["period"].split(" - ")
-            start = datetime.strptime(arr[0], "%d.%m.%Y").date()
-            end = datetime.strptime(arr[1], "%d.%m.%Y").date()
-            return start <= cur_date <= end
-        return True
+    date_start: str | None = field(metadata={"validate": Length(max=15)})
+    date_end: str | None = field(metadata={"validate": Length(max=15)})
+    day_of_week: str | None = field(metadata={"validate": Length(max=15)})
+    enabled: int = field()
 
 
 @dataclass

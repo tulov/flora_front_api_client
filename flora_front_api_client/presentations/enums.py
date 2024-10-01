@@ -105,6 +105,13 @@ class UnitOfTime(Enum):
     month = "month"
     year = "year"
 
+@unique
+class PromoWorkPeriod(Enum):
+    date = "date"
+    week = "week"
+    all = "all"
+    change = "change"
+
 
 @unique
 class OrderState(Enum):
