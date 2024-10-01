@@ -10,13 +10,13 @@ from .enums import PromoTypes, PromoWorkPeriod
 class PromoCode(BaseDataclass):
     id: int = field(metadata={"strict": True,})
     code: str = field(metadata={"validate": Length(max=30)})
-    discount: int =field()
+    discount: int = field()
+    day_of_week: str | None = field(metadata={"validate": Length(max=15)})
     work_days: str = field(metadata={"validate": OneOf([p.value for p in PromoWorkPeriod])})
     type: str = field(metadata={"validate": OneOf([r.value for r in PromoTypes])})
-    date_start: str | None = field(metadata={"validate": Length(max=15)})
-    date_end: str | None = field(metadata={"validate": Length(max=15)})
-    day_of_week: str | None = field(metadata={"validate": Length(max=15)})
     enabled: int = field()
+    date_start: str | None = field(metadata={"validate": Length(max=15)}, default=None)
+    date_end: str | None = field(metadata={"validate": Length(max=15)}, default=None)
 
 
 @dataclass
