@@ -13,7 +13,6 @@ class PromoCode(BaseDataclass):
     discount: int = field()
     day_of_week: str | None = field(metadata={"validate": Length(max=15)})
     work_days: str = field(metadata={"validate": OneOf([p.value for p in PromoWorkPeriod])})
-    type: str = field(metadata={"validate": OneOf([r.value for r in PromoTypes])})
     enabled: int = field()
     date_start: str | None = field(metadata={"validate": Length(max=15)}, default=None)
     date_end: str | None = field(metadata={"validate": Length(max=15)}, default=None)
