@@ -18,8 +18,10 @@ class PromoCode(BaseDataclass):
     day_of_week: str | None = field(metadata={"validate": Length(max=15)})
     work_days: str = field(metadata={"validate": OneOf([p.value for p in PromoWorkPeriod])})
     enabled: int = field()
+    promo_type: int = field(metadata={"validate": Length(max=3)})
     date_start: str | None = field(metadata={"validate": Length(max=15)}, default=None)
     date_end: str | None = field(metadata={"validate": Length(max=15)}, default=None)
+
 
     def check(self) -> bool:
         if not self.enabled:
