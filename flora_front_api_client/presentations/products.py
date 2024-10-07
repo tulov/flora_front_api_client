@@ -186,7 +186,7 @@ class FeaturedProduct(BaseDataclass):
     slug: str = field(metadata={"validate": Length(max=150, min=1)})
     title: str = field(metadata={"validate": Length(max=150, min=1)})
     description: str | None = field(metadata={"validate": Length(max=1000)})
-    height: Decimal
+    height: Decimal | None
     width: Decimal | None
     properties: str = field(metadata={"validate": Length(max=20)})
     available_condition: Decimal
