@@ -1,3 +1,4 @@
+from .bills import BillResponseSchema, BillsResponseSchema, BillPDFResponseSchema
 from .error import ErrorResponseSchema, ErrorSchema
 from .main import ApplicationInfoResponseSchema
 from .users import (
@@ -67,6 +68,7 @@ from .orders import (
     AfterRejectRequestBodySchema,
     LastDeliveryOrdersResponseSchema
 )
+from ..presentations.bills import BillPDFResponse
 
 DATE_FORMAT = "%Y-%m-%d"
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
@@ -134,5 +136,8 @@ __all__ = (
     FeaturedProductsResponseSchema,
     SearchCitiesResponseSchema,
     LastDeliveryOrdersResponseSchema,
-    CityWithProductCntResponseSchema
+    CityWithProductCntResponseSchema,
+    BillResponseSchema,
+    BillsResponseSchema,
+    BillPDFResponseSchema,
 )
