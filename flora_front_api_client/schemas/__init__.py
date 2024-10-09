@@ -1,4 +1,11 @@
-from .bills import BillResponseSchema, BillsResponseSchema, BillPDFResponseSchema
+from .bills import (
+    BillResponseSchema,
+    BillsResponseSchema,
+    BillPayRequestSchema,
+    CloudpaymentsBillPayRequestSchema,
+    CloudpaymentsBillAfter3dRequestSchema,
+    BillPDFResponseSchema,
+)
 from .error import ErrorResponseSchema, ErrorSchema
 from .main import ApplicationInfoResponseSchema
 from .users import (
@@ -139,5 +146,8 @@ __all__ = (
     CityWithProductCntResponseSchema,
     BillResponseSchema,
     BillsResponseSchema,
+    BillPayRequestSchema,
+    CloudpaymentsBillPayRequestSchema,
+    CloudpaymentsBillAfter3dRequestSchema,
     BillPDFResponseSchema,
 )
