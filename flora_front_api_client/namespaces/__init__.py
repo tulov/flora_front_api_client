@@ -16,6 +16,8 @@ from .callbacks import CallbacksNamespace
 from .full_text_search import FullTextSearchNamespace
 from .occasions import OccasionsNamespace
 from .subscribe import SubscribesNamespace
+from .bills import BillsNamespace
+
 
 
 NAMESPACES = {
@@ -37,4 +39,5 @@ NAMESPACES = {
     "full_text_search": FullTextSearchNamespace,
     "occasions": OccasionsNamespace,
     "subscribes": SubscribesNamespace,
+    "bills": BillsNamespace,
 }
