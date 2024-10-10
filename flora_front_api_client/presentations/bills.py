@@ -51,7 +51,7 @@ class BillUserContact(BaseDataclass):
 class Bill(BaseDataclass):
     id: int = field(metadata={"strict": True})
     guid: str = field()
-    created: int = field()
+    created_at: datetime = field()
     user_id: int = field(metadata={"strict": True})
     order_id: int = field(metadata={"strict": True})
     amount: Decimal = field()
