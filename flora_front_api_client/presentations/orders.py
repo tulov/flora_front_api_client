@@ -54,6 +54,12 @@ class OrderComment(OrderCommentBase):
     order_id: int = field(metadata={"strict": True})
     user_name: str | None = field()
 
+@dataclass
+class CurrencyPrices(BaseDataclass):
+    prices: dict[str, Decimal] | None = field(default_factory=dict)
+    selected_currency: str | None = field(default_factory=str)
+
+
 
 @dataclass
 class OrderInvoices(BaseDataclass):
@@ -64,9 +70,7 @@ class OrderInvoices(BaseDataclass):
     order_id: int = field(metadata={"strict": True})
     is_paid: bool = field(default=False)
     paid: int = field(default='0')
-    currency_prices: dict[str, Decimal] | None = field(default_factory=dict)
-
-
+    currency_prices: CurrencyPrices | None = field(default_factory=dict)
 
 @dataclass
 class Answer(BaseDataclass):
