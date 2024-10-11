@@ -57,6 +57,7 @@ class OrderComment(OrderCommentBase):
 
 @dataclass
 class OrderInvoices(BaseDataclass):
+    id: int = field(metadata={"strict": True})
     key: str | None = field(metadata={"validate": Length(max=64)})
     cost: Decimal = field()
     created: int = field()
