@@ -62,6 +62,7 @@ class OrderInvoices(BaseDataclass):
     created: int = field()
     order_id: int = field(metadata={"strict": True})
     is_paid: bool = field(default=False)
+    paid: int = field(default='0')
     currency_prices: dict[str, Decimal] | None = field(default_factory=dict)
 
 
