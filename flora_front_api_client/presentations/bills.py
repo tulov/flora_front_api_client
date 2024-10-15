@@ -17,7 +17,6 @@ class BillOrderDataItem(BaseDataclass):
     name: str = field()
     old_price: Decimal = field()
     price: Decimal = field()
-    length: Decimal = field()
     height: Decimal = field()
     width: Decimal = field()
     product_id: int = field()
