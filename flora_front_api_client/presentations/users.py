@@ -279,7 +279,7 @@ class User(BaseDataclass):
     name: str = field(metadata={"validate": Length(max=150)})
     discount: int = field(metadata={"strict": True, "validate": Range(min=0, max=100)})
     feed_sms: bool = field()
-    feed_mail: bool = field()
+    feed_news: bool = field()
     language: str = field(metadata={"validate": Length(equal=2)})
     currency: str = field(metadata={"validate": Length(equal=3)})
     is_moderated: bool = field()
