@@ -75,7 +75,7 @@ class OrderInvoices(BaseDataclass):
 @dataclass
 class Answer(BaseDataclass):
     rating: int | None = field(
-        metadata={"strict": True, "validate": Range(min=1, max=5)}, default=None
+        metadata={"strict": True, "validate": Range(min=0, max=5)}, default=None
     )
     id: int | None = field(metadata={"strict": True}, default=None)
     name: str | None = field(default=None)
