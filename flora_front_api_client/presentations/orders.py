@@ -71,6 +71,7 @@ class OrderInvoices(BaseDataclass):
     is_paid: bool = field(default=False)
     paid: int = field(default='0')
     currency_prices: CurrencyPrices | None = field(default_factory=dict)
+    user_id: int | None = field(default=None)
 
 @dataclass
 class Answer(BaseDataclass):
