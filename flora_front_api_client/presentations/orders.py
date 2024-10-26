@@ -138,6 +138,7 @@ class Order(BaseDataclass):
     items: list[OrderData] | None = field(default_factory=list)
     order_invoices: list[OrderInvoices] | None = field(default_factory=list)
     answer: Answer | None = field(default=None)
+    user: User | None = field(default=None)
 
     @property
     def not_send_photos(self) -> list[Image]:
