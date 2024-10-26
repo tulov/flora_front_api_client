@@ -6,7 +6,6 @@ from typing import Any
 from marshmallow.validate import Length, OneOf, Range
 
 from .base import SuccessResponse, BaseDataclass, PagedResponse
-from .bills import Bill
 from .cities import City
 from .enums import OrderState, OrderTypes
 from .images import Image
@@ -67,6 +66,7 @@ class OrderInvoices(BaseDataclass):
     key: str | None = field(metadata={"validate": Length(max=64)})
     cost: Decimal = field()
     created: int = field()
+    paysystem_id: int = field(metadata={"strict": True})
     order_id: int = field(metadata={"strict": True})
     is_paid: bool = field(default=False)
     paid: int = field(default="0")
@@ -233,7 +233,7 @@ class OrderCommentResponse(SuccessResponse):
 
 @dataclass
 class OrderBillResponse(SuccessResponse):
-    result: Bill = field()
+    result: OrderInvoices = field()
 
 
 @dataclass
