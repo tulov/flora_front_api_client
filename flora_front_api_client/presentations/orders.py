@@ -55,13 +55,14 @@ class OrderComment(OrderCommentBase):
 
 
 @dataclass
-class CurrencyPrices(BaseDataclass):
+class InvoiceAdditional(BaseDataclass):
     prices: dict[str, Decimal] | None = field(default_factory=dict)
-    selected_currency: str | None = field(default_factory=str)
+    selected_currency: str | None = field(default=None)
+    paygine_order_id: int | None = field(default=None)
 
 
 @dataclass
-class OrderInvoices(BaseDataclass):
+class Invoice(BaseDataclass):
     id: int = field(metadata={"strict": True})
     key: str | None = field(metadata={"validate": Length(max=64)})
     cost: Decimal = field()
@@ -71,8 +72,7 @@ class OrderInvoices(BaseDataclass):
     is_paid: bool = field(default=False)
     is_hold: bool = field(default=False)
     paid: int = field(default="0")
-    currency_prices: CurrencyPrices | None = field(default_factory=dict)
-    additional: Any = field(default_factory=dict)
+    additional: InvoiceAdditional = field(default_factory=dict)
     user_id: int | None = field(default=None)
 
 
@@ -137,7 +137,7 @@ class Order(BaseDataclass):
     currency: str | None = field(default="rub")
     tech: str | None = field(default=None)
     items: list[OrderData] | None = field(default_factory=list)
-    order_invoices: list[OrderInvoices] | None = field(default_factory=list)
+    order_invoices: list[Invoice] | None = field(default_factory=list)
     answer: Answer | None = field(default=None)
     user: User | None = field(default=None)
 
@@ -234,7 +234,7 @@ class OrderCommentResponse(SuccessResponse):
 
 @dataclass
 class OrderBillResponse(SuccessResponse):
-    result: OrderInvoices = field()
+    result: Invoice = field()
 
 
 @dataclass
