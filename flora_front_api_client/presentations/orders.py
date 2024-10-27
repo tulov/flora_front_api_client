@@ -69,6 +69,7 @@ class OrderInvoices(BaseDataclass):
     paysystem_id: int = field(metadata={"strict": True})
     order_id: int = field(metadata={"strict": True})
     is_paid: bool = field(default=False)
+    is_hold: bool = field(default=False)
     paid: int = field(default="0")
     currency_prices: CurrencyPrices | None = field(default_factory=dict)
     additional: Any = field(default_factory=dict)
