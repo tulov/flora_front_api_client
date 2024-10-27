@@ -3,10 +3,9 @@ from datetime import datetime, date
 from decimal import Decimal
 from typing import Any
 
-from marshmallow.validate import Length, OneOf
+from marshmallow.validate import Length
 
 from .base import SuccessResponse, BaseDataclass, PagedResponse
-from .enums import UnitOfSize
 from .images import Image
 
 
@@ -115,3 +114,11 @@ class File(BaseDataclass):
 @dataclass
 class BillPDFResponse(SuccessResponse):
     result: File = field()
+
+
+@dataclass
+class PayRussianFederationBillQuerystring(BaseDataclass):
+    id: int = field()  # идентификатор заказа со стороны paygine
+    operation: int = field()  # идентификатор операции на стороне paygine
+    reference: int = field()  # идентификатор заказа на стороне флоры
+    error: int | None = field()  # номер ошибки, если она возникла
