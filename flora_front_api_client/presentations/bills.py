@@ -119,6 +119,8 @@ class BillPDFResponse(SuccessResponse):
 @dataclass
 class PayRussianFederationBillQuerystring(BaseDataclass):
     id: int = field()  # идентификатор заказа со стороны paygine
-    operation: int = field()  # идентификатор операции на стороне paygine
-    reference: int = field()  # идентификатор заказа на стороне флоры
-    error: int | None = field()  # номер ошибки, если она возникла
+    operation: int | str = field(
+        default=""
+    )  # идентификатор операции на стороне paygine
+    reference: int | str = field(default="")  # идентификатор заказа на стороне флоры
+    error: int | None = field(default=None)  # номер ошибки, если она возникла
