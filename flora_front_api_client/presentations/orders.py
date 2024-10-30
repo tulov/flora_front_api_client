@@ -6,8 +6,7 @@ from typing import Any
 from marshmallow.validate import Length, OneOf, Range
 
 from .base import SuccessResponse, BaseDataclass, PagedResponse
-from .bills import Bill
-from .cities import City, Country
+from .cities import City
 from .enums import OrderState, OrderTypes
 from .images import Image
 from .products import Product
@@ -54,24 +53,28 @@ class OrderComment(OrderCommentBase):
     order_id: int = field(metadata={"strict": True})
     user_name: str | None = field()
 
+
 @dataclass
-class CurrencyPrices(BaseDataclass):
+class InvoiceAdditional(BaseDataclass):
     prices: dict[str, Decimal] | None = field(default_factory=dict)
-    selected_currency: str | None = field(default_factory=str)
-
+    selected_currency: str | None = field(default=None)
+    paygine_order_id: int | None = field(default=None)
 
 
 @dataclass
-class OrderInvoices(BaseDataclass):
+class Invoice(BaseDataclass):
     id: int = field(metadata={"strict": True})
     key: str | None = field(metadata={"validate": Length(max=64)})
     cost: Decimal = field()
     created: int = field()
+    paysystem_id: int = field(metadata={"strict": True})
     order_id: int = field(metadata={"strict": True})
     is_paid: bool = field(default=False)
-    paid: int = field(default='0')
-    currency_prices: CurrencyPrices | None = field(default_factory=dict)
+    is_hold: bool = field(default=False)
+    paid: int = field(default="0")
+    additional: InvoiceAdditional = field(default_factory=dict)
     user_id: int | None = field(default=None)
+
 
 @dataclass
 class Answer(BaseDataclass):
@@ -130,12 +133,13 @@ class Order(BaseDataclass):
     creator_id: int = field(metadata={"strict": True})
     delivery_cost: Decimal | None = field()
     total_rub: Decimal | None = field()
-    wishes: str | None = field(default='')
-    currency: str | None = field(default='rub')
+    wishes: str | None = field(default="")
+    currency: str | None = field(default="rub")
     tech: str | None = field(default=None)
     items: list[OrderData] | None = field(default_factory=list)
-    order_invoices: list[OrderInvoices] | None = field(default_factory=list)
+    order_invoices: list[Invoice] | None = field(default_factory=list)
     answer: Answer | None = field(default=None)
+    user: User | None = field(default=None)
 
     @property
     def not_send_photos(self) -> list[Image]:
@@ -230,7 +234,7 @@ class OrderCommentResponse(SuccessResponse):
 
 @dataclass
 class OrderBillResponse(SuccessResponse):
-    result: Bill = field()
+    result: Invoice = field()
 
 
 @dataclass
