@@ -22,6 +22,7 @@ class Category(BaseDataclass):
     slug: str = field(metadata={"validate": Length(max=100, min=1)})
     name: str = field(metadata={"validate": Length(max=150, min=1)}, default=None)
     name_ru: str = field(metadata={"validate": Length(max=150, min=1)}, default=None)
+    children_ids: list[int] = field(default=list)
     is_visible: bool = field(default=True)
     weight: int = field(default=0)
 
