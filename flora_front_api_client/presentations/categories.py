@@ -24,6 +24,7 @@ class Category(BaseDataclass):
     name_ru: str = field(metadata={"validate": Length(max=150, min=1)}, default=None)
     children_ids: list[int] = field(default=list)
     is_visible: bool = field(default=True)
+    is_tag: bool = field(default=True)
     weight: int = field(default=0)
 
 
