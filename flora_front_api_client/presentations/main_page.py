@@ -17,6 +17,7 @@ class MainPageBlock(BaseDataclass):
     is_system: bool = field()
     enabled: bool = field()
     index: int = field(metadata={"strict": True})
+    category_slug: str | None = field(default=None)
 
 
 @dataclass
