@@ -225,6 +225,7 @@ class CityWithProductCnt(BaseDataclass):
         }
     )
     city: str = field(metadata={"validate": Length(max=150, min=1)})
+    slug: str = field(metadata={"validate": Length(max=150, min=1)})
     product_cnt: int = field()
 
 
