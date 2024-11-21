@@ -52,6 +52,16 @@ class BillsNamespace(Namespace):
         )
 
     @expectations(schema=ResultResponseSchema)
+    async def get_pay(
+        self, guid: str, pay_service: str, **kwargs
+    ) -> (int, ResultResponse | ErrorResponse, RenewTokenResponse):
+        return await self._get(
+            self.build_url(postfix_url=f"{guid}/pay/{pay_service}"),
+            **kwargs,
+        )
+
+
+    @expectations(schema=ResultResponseSchema)
     async def russian_federation(
         self, guid: str, **kwargs
     ) -> (int, ResultResponse | ErrorResponse, RenewTokenResponse):
