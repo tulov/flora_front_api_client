@@ -59,6 +59,7 @@ class InvoiceAdditional(BaseDataclass):
     prices: dict[str, Decimal] | None = field(default_factory=dict)
     selected_currency: str | None = field(default=None)
     paygine_order_id: int | None = field(default=None)
+    epay_order_id: int | None = field(default=None)
 
 
 @dataclass
