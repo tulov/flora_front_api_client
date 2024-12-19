@@ -127,6 +127,7 @@ class Product(ProductBaseDataclass):
     weight: Decimal | None = field(default=None)
     min_flowers: Decimal | None = field(default=None)
     max_flowers: Decimal | None = field(default=None)
+    compound: str | None = field(default=None)
 
     # items: list[ProductItem] | None = field(default_factory=list)
 
