@@ -20,6 +20,7 @@ from flora_front_api_client.namespaces import (
     OccasionsNamespace,
     SubscribesNamespace,
     BillsNamespace,
+    SEONamespace,
 )
 from aiobreaker import CircuitBreaker
 from datetime import timedelta
@@ -45,6 +46,7 @@ class FloraApiClient:
     occasions: OccasionsNamespace
     subscribes: SubscribesNamespace
     bills: BillsNamespace
+    seo: SEONamespace
 
     def __init__(
         self,

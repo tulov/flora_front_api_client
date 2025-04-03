@@ -17,7 +17,7 @@ from .full_text_search import FullTextSearchNamespace
 from .occasions import OccasionsNamespace
 from .subscribe import SubscribesNamespace
 from .bills import BillsNamespace
-
+from .seo import SEONamespace
 
 
 NAMESPACES = {
@@ -40,4 +40,5 @@ NAMESPACES = {
     "occasions": OccasionsNamespace,
     "subscribes": SubscribesNamespace,
     "bills": BillsNamespace,
+    "seo": SEONamespace,
 }
