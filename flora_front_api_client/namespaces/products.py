@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flora_front_api_client.utils.decorators import expectations
 from ..namespaces.base import Namespace
 from ..presentations.auth import RenewTokenResponse
-from ..presentations.base import Querystring, WithFieldsQuerystring
+from ..presentations.base import Querystring
 from ..presentations.categories import FilterCounterRequest, FilterCounterResponse
 from ..presentations.error import ErrorResponse
 from ..presentations.products import (
@@ -17,7 +17,9 @@ from ..presentations.products import (
     IdsFeaturedProductsQuerystring,
     SuccessFeaturedProductsResponse,
     DeliveryTimePeriodResponse,
-    DeliveryTimePeriodRequest, CityWithProductCntResponse,
+    DeliveryTimePeriodRequest,
+    CityWithProductCntResponse,
+    FeaturedProductResponse,
 )
 from ..schemas import (
     ProductResponseSchema,
@@ -27,7 +29,11 @@ from ..schemas import (
     SuccessFeaturedProductsResponseSchema,
     FilterCounterResponseSchema,
 )
-from ..schemas.products import DeliveryTimePeriodResponseSchema, CityWithProductCntResponseSchema
+from ..schemas.products import (
+    DeliveryTimePeriodResponseSchema,
+    CityWithProductCntResponseSchema,
+    FeaturedProductResponseSchema,
+)
 
 
 class ProductsNamespace(Namespace):
@@ -45,11 +51,20 @@ class ProductsNamespace(Namespace):
     ) -> (int, ProductsResponse | ErrorResponse, RenewTokenResponse):
         return await self._get(self.build_url(query_params), **kwargs)
 
-    @expectations(schema=ProductResponseSchema)
+    @expectations(schema=FeaturedProductResponseSchema)
     async def get(
-        self, id_: int, query_params: WithFieldsQuerystring = None, **kwargs
-    ) -> (int, ProductResponse | ErrorResponse, RenewTokenResponse):
-        return await self._get(self.build_url(query_params, postfix_url=id_), **kwargs)
+        self,
+        id_or_slug: int | str,
+        city_slug: str,
+        query_params: PreferredExecutorQuerystring = None,
+        **kwargs,
+    ) -> (int, FeaturedProductResponse | ErrorResponse, RenewTokenResponse):
+        return await self._get(
+            self.build_url(
+                query_params, postfix_url=id_or_slug, url=f"/{city_slug}{self.URL}"
+            ),
+            **kwargs,
+        )
 
     @expectations(schema=ProductResponseSchema)
     async def update(
@@ -77,7 +92,9 @@ class ProductsNamespace(Namespace):
         self,
         **kwargs,
     ) -> (int, CityWithProductCntResponse | ErrorResponse):
-        return await self._get(self.build_url(postfix_url='city_with_product_cnt'), **kwargs)
+        return await self._get(
+            self.build_url(postfix_url="city_with_product_cnt"), **kwargs
+        )
 
     @expectations(schema=PreferredExecutorResponseSchema)
     async def preferred_executor(
