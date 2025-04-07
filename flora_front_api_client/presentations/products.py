@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Optional
+from typing import Any
 
 from marshmallow.validate import Length, OneOf
 
@@ -59,7 +59,7 @@ class DeliveryPrices:
 @dataclass
 class ProductBaseDataclass(BaseDataclass):
     name: str = field(metadata={"validate": Length(max=150, min=1)})
-    description: Optional[str] | None = field(metadata={"validate": Length(max=1000)})
+    description: str | None | None = field(metadata={"validate": Length(max=1000)})
     data: Any | None = field()
     revision: int = field(
         metadata={
@@ -216,6 +216,11 @@ class SuccessFeaturedProductsResponse(SuccessResponse):
     result: list[FeaturedProduct] = field(
         default_factory=list, metadata={"required": True}
     )
+
+
+@dataclass
+class FeaturedProductResponse(SuccessResponse):
+    result: FeaturedProduct = field()
 
 
 @dataclass
