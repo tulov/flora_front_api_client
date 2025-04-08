@@ -218,6 +218,7 @@ class FeaturedProduct(BaseDataclass):
     is_available: bool = field(default=True)
     min_flowers: int | None = field(default=None)
     max_flowers: int | None = field(default=None)
+    avg_rating: float = field(default=0.0)
 
 
 @dataclass
