@@ -177,6 +177,22 @@ class FeaturedProductExecutor(BaseDataclass):
 
 
 @dataclass
+class FeaturedProductCategory(BaseDataclass):
+    id: int = field(
+        metadata={
+            "strict": True,
+        }
+    )
+    parent_id: int | None = field(
+        metadata={
+            "strict": True,
+        }
+    )
+    slug: str = field(metadata={"validate": Length(max=100, min=1)})
+    name: str = field(metadata={"validate": Length(max=50, min=1)}, default=None)
+
+
+@dataclass
 class FeaturedProduct(BaseDataclass):
     id: int = field(
         metadata={
@@ -197,7 +213,7 @@ class FeaturedProduct(BaseDataclass):
     delivery_prices: DeliveryPrices
     compound: str | None = field(metadata={"validate": Length(max=1000)})
     prices: Prices
-    categories: list[int] | None = field(default_factory=list)
+    categories: list[FeaturedProductCategory] | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
     min_flowers: int | None = field(default=None)

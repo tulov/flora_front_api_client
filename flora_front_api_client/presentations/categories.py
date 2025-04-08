@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import date
+from typing import Any
 
 from marshmallow.validate import Length, OneOf, Range
 
@@ -20,12 +21,11 @@ class Category(BaseDataclass):
         }
     )
     slug: str = field(metadata={"validate": Length(max=100, min=1)})
-    name: str = field(metadata={"validate": Length(max=150, min=1)}, default=None)
-    name_ru: str = field(metadata={"validate": Length(max=150, min=1)}, default=None)
-    children_ids: list[int] = field(default=list)
+    name_en: str = field(metadata={"validate": Length(max=50, min=1)}, default=None)
+    name_ru: str = field(metadata={"validate": Length(max=50, min=1)}, default=None)
     is_visible: bool = field(default=True)
     is_tag: bool = field(default=True)
-    weight: int = field(default=0)
+    additional: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
