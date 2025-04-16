@@ -4,6 +4,7 @@ from urllib.parse import urlencode
 
 from aiobreaker import CircuitBreaker
 from aiohttp import ClientSession
+from opentelemetry.propagate import inject
 
 from flora_front_api_client.payloads import dumps
 from flora_front_api_client.presentations.base import BaseDataclass
@@ -60,40 +61,31 @@ class Namespace:
                 return resp.status, await resp.json(), new_tokens
 
     async def _run_query(self, url, method="get", *, long_token: str = "", **kwargs):
+        params = {}
+        if method in ("get", "delete"):
+            params = {"url": f"{self._url_prefix}{url}"}
+        elif method in ("post", "put"):
+            params = kwargs.get("json", {})
+        headers = self.get_auth_headers(params)
+        inject(headers)
+        if "headers" in kwargs:
+            kwargs["headers"].update(headers)
+        else:
+            kwargs["headers"] = headers
         return await self._breaker.call_async(
             self._query, url, method, long_token=long_token, **kwargs
         )
 
     async def _get(self, url, **kwargs):
-        headers = self.get_auth_headers({"url": f"{self._url_prefix}{url}"})
-        if "headers" in kwargs:
-            kwargs["headers"].update(headers)
-        else:
-            kwargs["headers"] = headers
         return await self._run_query(url, **kwargs)
 
     async def _post(self, url, **kwargs):
-        headers = self.get_auth_headers(kwargs.get("json", {}))
-        if "headers" in kwargs:
-            kwargs["headers"].update(headers)
-        else:
-            kwargs["headers"] = headers
         return await self._run_query(url, "post", **kwargs)
 
     async def _put(self, url, **kwargs):
-        headers = self.get_auth_headers(kwargs.get("json", {}))
-        if "headers" in kwargs:
-            kwargs["headers"].update(headers)
-        else:
-            kwargs["headers"] = headers
         return await self._run_query(url, "put", **kwargs)
 
     async def _delete(self, url, **kwargs):
-        headers = self.get_auth_headers({"url": f"{self._url_prefix}{url}"})
-        if "headers" in kwargs:
-            kwargs["headers"].update(headers)
-        else:
-            kwargs["headers"] = headers
         return await self._run_query(url, "delete", **kwargs)
 
     def build_url(

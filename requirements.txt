@@ -72,3 +72,4 @@ aiobreaker==1.2.0
 typeguard
 
 cloudinary==1.40.0
+opentelemetry-api
