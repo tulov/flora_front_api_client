@@ -63,10 +63,6 @@ typing-extensions==4.4.0
 typing-inspect==0.8.0
     # via
     #   -r requirements.txt
-    #   marshmallow-dataclass
-yarl==1.8.2
-    # via
-    #   -r requirements.txt
     #   aiohttp
 aiobreaker==1.2.0
 typeguard
