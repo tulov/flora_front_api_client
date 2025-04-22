@@ -11,9 +11,7 @@ import cloudinary
 def _init_cloudinary():
     from ..client import FloraApiClient
 
-    cloudinary.config(
-        cloud_name=FloraApiClient.cloudinary_cloud_name,
-    )
+    cloudinary.config(**FloraApiClient.cloudinary_config)
 
 
 @dataclass
