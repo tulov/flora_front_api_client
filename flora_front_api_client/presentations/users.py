@@ -282,8 +282,6 @@ class User(BaseDataclass):
     feed_news: bool = field()
     language: str = field(metadata={"validate": Length(equal=2)})
     currency: str = field(metadata={"validate": Length(equal=3)})
-    is_moderated: bool = field()
-    banned: bool = field()
     phone: str | None = field()
     percent_us: int = field(
         metadata={
@@ -291,6 +289,8 @@ class User(BaseDataclass):
             "validate": Range(min=0, max=100),
         }
     )
+    banned: bool = field(default=False)
+    is_moderated: bool = field(default=True)
     contacts: Contacts | None = field(default=None)
     gender: str | None = field(
         default=None, metadata={"validate": OneOf([r.value for r in Genders])}
