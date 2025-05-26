@@ -105,6 +105,7 @@ class UnitOfTime(Enum):
     month = "month"
     year = "year"
 
+
 @unique
 class PromoWorkPeriod(Enum):
     date = "date"
@@ -157,6 +158,7 @@ class CommunicationTransports(Enum):
     sms = "sms"
     telegram = "telegram"
     email = "email"
+    wa_dialog = "wa_dialog"
 
 
 @unique
