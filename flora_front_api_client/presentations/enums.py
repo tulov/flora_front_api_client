@@ -204,3 +204,9 @@ class TodoStates(Enum):
     new = "new"
     work = "work"
     finish = "finish"
+
+
+@unique
+class Languages(Enum):
+    en = "en"
+    ru = "ru"

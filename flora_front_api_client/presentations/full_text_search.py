@@ -1,34 +1,23 @@
 from dataclasses import dataclass, field
 from datetime import date
 
-from .base import BaseDataclass, PagedResponse
+from marshmallow.validate import OneOf
+
+from .base import BaseDataclass, SuccessResponse
+from .enums import Languages
+from .products import FeaturedProduct
 
 
 @dataclass
-class Product(BaseDataclass):
-    id: int = field(
-        metadata={
-            "strict": True,
-        }
+class ProductFullTextSearchResponse(SuccessResponse):
+    result: list[FeaturedProduct] = field(
+        default_factory=list, metadata={"required": True}
     )
-    city: str = field()
-    country: str = field()
-    name: str = field()
-    description: str = field()
-    tags: str = field()
-    category: str = field()
-    compound: str = field()
-    image: str = field()
-    revision: int = field(metadata={"strict": True})
-
-
-@dataclass
-class ProductFullTextSearchResponse(PagedResponse):
-    result: list[Product] = field(default_factory=list, metadata={"required": True})
 
 
 @dataclass
 class ProductFullTextSearchRequest(BaseDataclass):
     term: str = field()
     city_id: int = field(metadata={"strict": True})
+    lang: str = field(metadata={"validate": OneOf([p.value for p in Languages])})
     delivery_date: date = field()
