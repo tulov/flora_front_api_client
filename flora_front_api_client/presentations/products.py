@@ -189,7 +189,7 @@ class FeaturedProductCategory(BaseDataclass):
         }
     )
     slug: str = field(metadata={"validate": Length(max=100, min=1)})
-    name: str = field(metadata={"validate": Length(max=50, min=1)}, default=None)
+    name_ru: str = field(metadata={"validate": Length(max=50, min=1)}, default=None)
 
 
 @dataclass
