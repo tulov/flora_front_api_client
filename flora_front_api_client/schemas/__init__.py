@@ -8,6 +8,7 @@ from .bills import (
 )
 from .error import ErrorResponseSchema, ErrorSchema
 from .main import ApplicationInfoResponseSchema
+from .tags import TagSchema, TagsTreeResponseSchema, TagResponseSchema, TagsResponseSchema
 from .users import (
     UserSchema,
     DataForAuthSchema,
@@ -150,4 +151,8 @@ __all__ = (
     CloudpaymentsBillPayRequestSchema,
     CloudpaymentsBillAfter3dRequestSchema,
     BillPDFResponseSchema,
+    TagSchema,
+    TagsTreeResponseSchema,
+    TagResponseSchema,
+    TagsResponseSchema
 )

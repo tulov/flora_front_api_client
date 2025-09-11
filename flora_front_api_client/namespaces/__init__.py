@@ -1,3 +1,4 @@
+from .tags import TagsNamespace
 from .users import UsersNamespace
 from .info import InfoNamespace
 from .auth import AuthNamespace
@@ -27,6 +28,7 @@ NAMESPACES = {
     "auth": AuthNamespace,
     "data_for_auth": DataForAuthNamespace,
     "categories": CategoriesNamespace,
+    "tags": TagsNamespace,
     "images": ImagesNamespace,
     "products": ProductsNamespace,
     "cities": CitiesNamespace,
