@@ -214,6 +214,7 @@ class FeaturedProduct(BaseDataclass):
     compound: str | None = field(metadata={"validate": Length(max=1000)})
     prices: Prices
     categories: list[FeaturedProductCategory] | None = field(default_factory=list)
+    tags: list | None = field(default_factory=list)
     images: list[Image] | None = field(default_factory=list)
     is_available: bool = field(default=True)
     min_flowers: int | None = field(default=None)
