@@ -224,6 +224,7 @@ class FeaturedProduct(BaseDataclass):
 
 @dataclass
 class FeaturedProductsResponse(PagedResponse):
+    visible_tags: list[Category] | None = field(default_factory=list)
     result: list[FeaturedProduct] = field(
         default_factory=list, metadata={"required": True}
     )
