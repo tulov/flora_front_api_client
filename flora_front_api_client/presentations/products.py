@@ -9,6 +9,7 @@ from .base import BaseDataclass, SuccessResponse, PagedResponse, Querystring
 from .categories import Category
 from .enums import Currency, UnitOfWeight, UnitOfSize, UnitOfCount, ProductTypes
 from .images import Image
+from .tags import TagsWithParents
 
 
 @dataclass
@@ -224,7 +225,7 @@ class FeaturedProduct(BaseDataclass):
 
 @dataclass
 class FeaturedProductsResponse(PagedResponse):
-    visible_tags: list[Category] | None = field(default_factory=list)
+    visible_tags: list[TagsWithParents] | None = field(default_factory=list)
     result: list[FeaturedProduct] = field(
         default_factory=list, metadata={"required": True}
     )

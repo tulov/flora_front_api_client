@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Any
 
 from marshmallow.validate import Length
 
@@ -12,7 +13,7 @@ class TagBase(BaseDataclass):
             "strict": True,
         }
     )
-    name: str = field(metadata={"validate": Length(max=150, min=1)})
+    name_ru: str = field(metadata={"validate": Length(max=150, min=1)})
 
 
 @dataclass
@@ -20,11 +21,17 @@ class Tag(TagBase):
     parent_id: int | None = field(
         metadata={
             "strict": True,
-        },
-        default=None,
+        }
     )
+    slug: str = field(metadata={"validate": Length(max=100, min=1)})
+    name_en: str = field(metadata={"validate": Length(max=50, min=1)}, default=None)
     is_visible: bool = field(default=True)
-    is_inherited: bool = field(default=False)
+    is_tag: bool = field(default=True)
+    additional: dict[str, Any] = field(default_factory=dict)
+
+
+
+
 
 
 @dataclass
@@ -51,6 +58,11 @@ class TagsResponse(PagedResponse):
 @dataclass
 class TagsTreeItem(TagBase):
     children: list[TagBase] | None = field()
+
+@dataclass
+class TagsWithParents(TagsTreeItem):
+    parent_id: int = field(metadata={"strict": True})
+    name: str = field(metadata={"validate": Length(max=150, min=1)})
 
 
 @dataclass
