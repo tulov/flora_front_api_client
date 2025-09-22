@@ -63,7 +63,7 @@ class TagCounter(BaseDataclass):
 @dataclass
 class FilterCounterResult(BaseDataclass):
     count: int = field(metadata={"strict": True})
-    tags: list[TagCounter] = field(default_factory=list, metadata={"required": True})
+    tags_ids: list[int] = field(default_factory=list, metadata={"required": True})
 
 
 @dataclass
