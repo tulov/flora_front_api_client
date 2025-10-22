@@ -115,6 +115,7 @@ class CitiesResponse(PagedResponse):
 class SearchCity(BaseDataclass):
     id: int = field(metadata={"strict": True})
     name: str = field()
+    slug: str = field()
 
 
 @dataclass
