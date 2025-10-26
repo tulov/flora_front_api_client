@@ -60,7 +60,7 @@ class DeliveryPrices:
 @dataclass
 class ProductBaseDataclass(BaseDataclass):
     name: str = field(metadata={"validate": Length(max=150, min=1)})
-    description: str | None | None = field(metadata={"validate": Length(max=1000)})
+    description: str | None | None = field(metadata={"validate": Length(max=2000)})
     data: Any | None = field()
     revision: int = field(
         metadata={
@@ -203,7 +203,7 @@ class FeaturedProduct(BaseDataclass):
     type: str = field(metadata={"validate": OneOf([p.value for p in ProductTypes])})
     slug: str = field(metadata={"validate": Length(max=150, min=1)})
     title: str = field(metadata={"validate": Length(max=150, min=1)})
-    description: str | None = field(metadata={"validate": Length(max=1000)})
+    description: str | None = field(metadata={"validate": Length(max=2000)})
     height: Decimal | None
     width: Decimal | None
     properties: str = field(metadata={"validate": Length(max=20)})
