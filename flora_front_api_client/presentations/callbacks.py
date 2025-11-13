@@ -23,6 +23,7 @@ class Callback(BaseDataclass):
 
 @dataclass
 class CallbackCreateRequest(BaseDataclass):
+    name: str = field(metadata={"validate": Length(max=150)})
     phone: str = field(metadata={"validate": Phone()})
     city_id: int = field(
         metadata={
