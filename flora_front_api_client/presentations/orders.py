@@ -202,7 +202,7 @@ class CreateOrderRequest(BaseDataclass):
     payment_method: str = field(
         metadata={"validate": OneOf(["card", "2checkout", "acc"])}
     )
-    take_photo_with_receiver: bool = (field(default=False),)
+    take_photo_with_receiver: bool = field(default=False),
     products: list[OrderProduct] = field(
         default_factory=list, metadata={"required": True}
     )
