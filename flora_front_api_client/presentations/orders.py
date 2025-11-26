@@ -201,7 +201,7 @@ class CreateOrderRequest(BaseDataclass):
     user_sum: Decimal = field()
     currency: str = field(metadata={"validate": Length(equal=3)})
     payment_method: str = field(
-        metadata={"validate": OneOf(["card", "2checkout", "acc", "paypal"])}
+        metadata={"validate": OneOf(["card", "2checkout", "acc", "paypal", "cash"])}
     )
     take_photo_with_receiver: bool = field(default=False)
     products: list[OrderProduct] = field(
