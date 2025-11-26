@@ -53,6 +53,7 @@ class Bill(BaseDataclass):
     user_id: int = field(metadata={"strict": True})
     order_id: int = field(metadata={"strict": True})
     amount: Decimal = field()
+    amount_discount: Decimal = field()
     currency: str = field(metadata={"validate": Length(equal=3)})
     is_paid: bool = field()
     comment: str | None = field(default=None)
