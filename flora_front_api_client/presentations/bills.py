@@ -17,6 +17,7 @@ class BillOrderDataItem(BaseDataclass):
     old_price: Decimal = field()
     price: Decimal = field()
     product_id: int = field()
+    discount: Decimal = field()
     height: Decimal | None = field(default=None)
     width: Decimal | None = field(default=None)
 
