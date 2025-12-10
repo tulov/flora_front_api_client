@@ -1,3 +1,4 @@
+from .countries import CountriesNamespace
 from .tags import TagsNamespace
 from .users import UsersNamespace
 from .info import InfoNamespace
@@ -32,6 +33,7 @@ NAMESPACES = {
     "images": ImagesNamespace,
     "products": ProductsNamespace,
     "cities": CitiesNamespace,
+    "countries": CountriesNamespace,
     "menu": MenuNamespace,
     "slider_items": SliderItemsNamespace,
     "orders": OrdersNamespace,

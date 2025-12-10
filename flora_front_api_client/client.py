@@ -24,7 +24,7 @@ from flora_front_api_client.namespaces import (
     BillsNamespace,
     SEONamespace,
     PagesNamespace,
-    TagsNamespace
+    TagsNamespace, CountriesNamespace
 )
 from aiobreaker import CircuitBreaker
 from datetime import timedelta
@@ -41,6 +41,7 @@ class FloraApiClient:
     images: ImagesNamespace
     products: ProductsNamespace
     cities: CitiesNamespace
+    countries: CountriesNamespace
     menu: MenuNamespace
     slider_items: SliderItemsNamespace
     orders: OrdersNamespace

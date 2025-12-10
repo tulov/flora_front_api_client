@@ -10,7 +10,7 @@ from ..schemas import (
 )
 
 
-class CitiesNamespace(Namespace):
+class CountriesNamespace(Namespace):
     URL = '/countries/'
 
 
