@@ -6,6 +6,7 @@ from .bills import (
     CloudpaymentsBillAfter3dRequestSchema,
     BillPDFResponseSchema,
 )
+from .countries import SearchCountriesResponseSchema
 from .error import ErrorResponseSchema, ErrorSchema
 from .main import ApplicationInfoResponseSchema
 from .tags import TagSchema, TagsTreeResponseSchema, TagResponseSchema, TagsResponseSchema
@@ -57,6 +58,7 @@ from .products import (
     CityWithProductCntResponseSchema
 )
 from .cities import CitiesResponseSchema, CityResponseSchema, SearchCitiesResponseSchema
+from .countries import SearchCountriesResponseSchema
 
 from .menu import MenuResponseSchema, MenuRequestSchema, MenuQuerystringSchema
 from .slider import (
@@ -115,6 +117,7 @@ __all__ = (
     ProductRequestSchema,
     CitiesResponseSchema,
     CityResponseSchema,
+    SearchCountriesResponseSchema,
     FeaturedProductsQuerystringSchema,
     MenuResponseSchema,
     MenuRequestSchema,
