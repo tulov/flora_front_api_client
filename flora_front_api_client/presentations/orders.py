@@ -61,6 +61,8 @@ class InvoiceAdditional(BaseDataclass):
     paygine_order_id: int | None = field(default=None)
     epay_order_id: str | None = field(default=None)
     cloudpayments_order_id: str | None = field(default=None)
+    yapay_order_id: str | None = field(default=None)
+    yapay_redirect_url: str | None = field(default=None)
     paypal_order_id: str | None = field(default=None)
 
 
