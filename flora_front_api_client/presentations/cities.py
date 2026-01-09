@@ -37,7 +37,7 @@ class Country(BaseDataclass):
             "strict": True,
         }
     )
-    name_ru: str = field(metadata={"validate": Length(max=30)})
+    name_ru: str = field(metadata={"validate": Length(max=100)})
     slug: str = field(metadata={"validate": Length(max=100)})
     capital_id: int | None = field(metadata={"strict": True})
     subcontinent: Subcontinent | None = field()
