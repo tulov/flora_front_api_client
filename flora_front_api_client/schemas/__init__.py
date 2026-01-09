@@ -58,7 +58,7 @@ from .products import (
     CityWithProductCntResponseSchema
 )
 from .cities import CitiesResponseSchema, CityResponseSchema, SearchCitiesResponseSchema
-from .countries import SearchCountriesResponseSchema
+from .countries import SearchCountriesResponseSchema, CountriesResponseSchema
 
 from .menu import MenuResponseSchema, MenuRequestSchema, MenuQuerystringSchema
 from .slider import (
@@ -118,6 +118,7 @@ __all__ = (
     CitiesResponseSchema,
     CityResponseSchema,
     SearchCountriesResponseSchema,
+    CountriesResponseSchema,
     FeaturedProductsQuerystringSchema,
     MenuResponseSchema,
     MenuRequestSchema,
