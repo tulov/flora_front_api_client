@@ -16,7 +16,7 @@ class SEO(BaseDataclass):
     url: str = field(metadata={"validate": Length(max=500)})
     title: str = field()
     description: str = field()
-    image: Image = field()
+    image: Image | None = field()
     h1: str = field()
     text: str = field()
 
