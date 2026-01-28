@@ -21,6 +21,7 @@ from .subscribe import SubscribesNamespace
 from .bills import BillsNamespace
 from .seo import SEONamespace
 from .pages import PagesNamespace
+from .inflects import InflectsNamespace
 
 
 NAMESPACES = {
@@ -47,4 +48,5 @@ NAMESPACES = {
     "bills": BillsNamespace,
     "seo": SEONamespace,
     "pages": PagesNamespace,
+    "inflects": InflectsNamespace,
 }
