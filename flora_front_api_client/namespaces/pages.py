@@ -4,6 +4,8 @@ from ..presentations.auth import RenewTokenResponse
 from ..presentations.error import ErrorResponse
 from ..presentations.pages import PageResponse
 from ..schemas.pages import PageResponseSchema
+from ..presentations.base import Querystring
+
 
 
 class PagesNamespace(Namespace):
@@ -11,6 +13,6 @@ class PagesNamespace(Namespace):
 
     @expectations(schema=PageResponseSchema)
     async def get(
-        self, slug: str, **kwargs
+        self, query_params: Querystring = None, **kwargs
     ) -> (int, PageResponse | ErrorResponse, RenewTokenResponse):
-        return await self._get(self.build_url(postfix_url=slug), **kwargs)
+            return await self._get(self.build_url(query_params), **kwargs)
