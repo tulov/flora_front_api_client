@@ -140,6 +140,7 @@ class Order(BaseDataclass):
     total_rub: Decimal | None = field()
     wishes: str | None = field(default="")
     currency: str | None = field(default="rub")
+    currencies: str | None = field(default="")
     tech: str | None = field(default=None)
     items: list[OrderData] | None = field(default_factory=list)
     order_invoices: list[Invoice] | None = field(default_factory=list)
