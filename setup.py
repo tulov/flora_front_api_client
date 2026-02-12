@@ -1,7 +1,5 @@
 import os
 from importlib.machinery import SourceFileLoader
-
-from pkg_resources import parse_requirements
 from setuptools import find_packages, setup
 
 
@@ -16,12 +14,11 @@ module = SourceFileLoader(
 
 def load_requirements(fname: str) -> list:
     requirements = []
-    with open(fname, 'r') as fp:
-        for req in parse_requirements(fp.read()):
-            extras = '[{}]'.format(','.join(req.extras)) if req.extras else ''
-            requirements.append(
-                '{}{}{}'.format(req.name, extras, req.specifier)
-            )
+    with open(fname, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                requirements.append(line)
     return requirements
 
 
@@ -42,7 +39,7 @@ setup(
         'Operating System :: POSIX',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: Implementation :: CPython'
     ],
     python_requires='>=3.10',
