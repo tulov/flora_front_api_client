@@ -9,7 +9,7 @@ from .enums import CommunicationTransports
 @dataclass
 class AuthRequest(BaseDataclass):
     auth_key: str = field(metadata={"validate": Length(min=3, max=150)})
-    password: str = field(metadata={"validate": Length(min=6, max=30)})
+    password: str = field(metadata={"validate": Length(min=4, max=30)})
 
 
 @dataclass
