@@ -46,7 +46,7 @@ mypy-extensions==0.4.3
     # via
     #   -r requirements.txt
     #   typing-inspect
-packaging==21.3
+packaging
     # via
     #   -r requirements.txt
     #   marshmallow
