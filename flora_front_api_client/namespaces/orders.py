@@ -15,6 +15,7 @@ from ..presentations.orders import (
     LastDeliveryOrdersResponse,
     OrderResponse,
     CreateOrderRequest,
+    OneClickOrderRequest,
     OrdersResponse,
     OrderBillResponse,
     OrderBillRequest,
@@ -40,6 +41,16 @@ class OrdersNamespace(Namespace):
         self, data: CreateOrderRequest, **kwargs
     ) -> (int, OrderResponse | ErrorResponse, RenewTokenResponse):
         return await self._post(self.URL, json=data.as_dict(), **kwargs)
+
+    @expectations(schema=SuccessResponseSchema, expected_code=HTTPStatus.CREATED)
+    async def one_click(
+        self, data: OneClickOrderRequest, **kwargs
+    ) -> (int, SuccessResponse | ErrorResponse, RenewTokenResponse):
+        return await self._post(
+            self.build_url(postfix_url="one-click/"),
+            json=data.as_dict(),
+            **kwargs,
+        )
 
     @expectations(schema=OrderResponseSchema)
     async def get(

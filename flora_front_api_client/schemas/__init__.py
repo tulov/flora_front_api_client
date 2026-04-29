@@ -6,10 +6,14 @@ from .bills import (
     CloudpaymentsBillAfter3dRequestSchema,
     BillPDFResponseSchema,
 )
-from .countries import SearchCountriesResponseSchema
 from .error import ErrorResponseSchema, ErrorSchema
 from .main import ApplicationInfoResponseSchema
-from .tags import TagSchema, TagsTreeResponseSchema, TagResponseSchema, TagsResponseSchema
+from .tags import (
+    TagSchema,
+    TagsTreeResponseSchema,
+    TagResponseSchema,
+    TagsResponseSchema,
+)
 from .users import (
     UserSchema,
     DataForAuthSchema,
@@ -55,7 +59,7 @@ from .products import (
     PreferredExecutorQuerystringSchema,
     SuccessFeaturedProductsResponseSchema,
     IdsFeaturedProductsQuerystringSchema,
-    CityWithProductCntResponseSchema
+    CityWithProductCntResponseSchema,
 )
 from .cities import CitiesResponseSchema, CityResponseSchema, SearchCitiesResponseSchema
 from .countries import SearchCountriesResponseSchema, CountriesResponseSchema
@@ -70,15 +74,15 @@ from .slider import (
 from .orders import (
     OrderResponseSchema,
     CreateOrderRequestSchema,
+    OneClickOrderRequestSchema,
     OrdersResponseSchema,
     OrderCommentRequestSchema,
     OrderCommentResponseSchema,
     OrderBillRequestSchema,
     OrderBillResponseSchema,
     AfterRejectRequestBodySchema,
-    LastDeliveryOrdersResponseSchema
+    LastDeliveryOrdersResponseSchema,
 )
-from ..presentations.bills import BillPDFResponse
 
 DATE_FORMAT = "%Y-%m-%d"
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
@@ -131,6 +135,7 @@ __all__ = (
     SuccessFeaturedProductsResponseSchema,
     IdsFeaturedProductsQuerystringSchema,
     CreateOrderRequestSchema,
+    OneClickOrderRequestSchema,
     OrderResponseSchema,
     OrdersResponseSchema,
     ResultResponseSchema,
@@ -158,5 +163,5 @@ __all__ = (
     TagSchema,
     TagsTreeResponseSchema,
     TagResponseSchema,
-    TagsResponseSchema
+    TagsResponseSchema,
 )

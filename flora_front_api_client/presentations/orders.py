@@ -11,6 +11,7 @@ from .enums import OrderState, OrderTypes
 from .images import Image
 from .products import Product
 from .users import User
+from .validates import Phone
 
 
 @dataclass
@@ -204,12 +205,22 @@ class CreateOrderRequest(BaseDataclass):
     user_sum: Decimal = field()
     currency: str = field(metadata={"validate": Length(equal=3)})
     payment_method: str = field(
-        metadata={"validate": OneOf(["cloudpayments_ru","epay", "yapay", "paypal", "cash"])}
+        metadata={
+            "validate": OneOf(["cloudpayments_ru", "epay", "yapay", "paypal", "cash"])
+        }
     )
     take_photo_with_receiver: bool = field(default=False)
     products: list[OrderProduct] = field(
         default_factory=list, metadata={"required": True}
     )
+
+
+@dataclass
+class OneClickOrderRequest(BaseDataclass):
+    product_id: int = field()
+    name: str = field()
+    phone: str = field(metadata={"validate": Phone()})
+    flowers_count: int = field(default=0)
 
 
 @dataclass
