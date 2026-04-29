@@ -217,9 +217,11 @@ class CreateOrderRequest(BaseDataclass):
 
 @dataclass
 class OneClickOrderRequest(BaseDataclass):
-    product_id: int = field()
+    product_id: int = field(metadata={"strict": True})
+    city_id: int = field(metadata={"strict": True})
     name: str = field()
     phone: str = field(metadata={"validate": Phone()})
+    currency: str = field(metadata={"validate": Length(equal=3)})
     flowers_count: int = field(default=0)
 
 
