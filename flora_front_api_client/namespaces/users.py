@@ -8,6 +8,7 @@ from ..presentations.cities import SearchCitiesResponse
 from ..presentations.error import ErrorResponse
 from ..presentations.users import (
     RegistrationUserData,
+    RegistrationFloristData,
     User,
     UsersResponse,
     ChangePasswordRequest,
@@ -77,4 +78,13 @@ class UsersNamespace(Namespace):
     ) -> (int, UserPublicDataResponse | ErrorResponse, RenewTokenResponse):
         return await self._post(
             self.build_url(postfix_url="public-data/"), json=ids, **kwargs
+        )
+
+    @expectations(schema=UserSchema, expected_code=HTTPStatus.CREATED)
+    async def register_florist(
+        self, data: RegistrationFloristData | dict, **kwargs
+    ) -> (int, User | ErrorResponse, RenewTokenResponse | None):
+        json_data = data.as_dict() if isinstance(data, RegistrationFloristData) else data
+        return await self._post(
+            self.build_url(postfix_url="registration-florists/"), json=json_data, **kwargs
         )

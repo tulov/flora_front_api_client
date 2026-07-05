@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime, date, timedelta
 from typing import Any
+import re
 
 from marshmallow import ValidationError
 from marshmallow.fields import Decimal
@@ -354,6 +355,86 @@ class RegistrationUserData(BaseDataclass):
                     ]
                 }
             )
+
+
+@dataclass
+class RegistrationFloristData(BaseDataclass):
+    full_name: str = field(default="", metadata={"validate": Length(max=150)})
+    phone: str = field(default="", metadata={"validate": Length(max=50)})
+    telegram: str = field(default="", metadata={"validate": Length(max=150)})
+    whatsapp: str = field(default="", metadata={"validate": Length(max=50)})
+    email: str = field(default="", metadata={"validate": Length(max=150)})
+    mobile_phone: str = field(default="", metadata={"validate": Length(max=50)})
+    company_name: str = field(default="", metadata={"validate": Length(max=100)})
+    country: str = field(default="", metadata={"validate": Length(max=100)})
+    city_name: str = field(default="", metadata={"validate": Length(max=100)})
+    address: str = field(default="", metadata={"validate": Length(max=200)})
+    delivery_areas: str = field(default="")
+    replacement_agreement: str = field(default="")
+    delivery_photo: str = field(default="")
+    website: str = field(default="", metadata={"validate": Length(max=250)})
+    partner_services: str = field(default="", metadata={"validate": Length(max=250)})
+    worked_with_services: str = field(default="", metadata={"validate": Length(max=250)})
+    weekdays_from: str = field(
+        default="",
+        metadata={"validate": Regexp("(^([0-1][0-9]|2[0-3]):[0-5][0-9]$)|^$")},
+    )
+    weekdays_to: str = field(
+        default="",
+        metadata={"validate": Regexp("(^([0-1][0-9]|2[0-3]):[0-5][0-9]$)|^$")},
+    )
+    weekdays_full_time: str = field(default="")
+    saturday_from: str = field(
+        default="",
+        metadata={"validate": Regexp("(^([0-1][0-9]|2[0-3]):[0-5][0-9]$)|^$")},
+    )
+    saturday_to: str = field(
+        default="",
+        metadata={"validate": Regexp("(^([0-1][0-9]|2[0-3]):[0-5][0-9]$)|^$")},
+    )
+    sunday_from: str = field(
+        default="",
+        metadata={"validate": Regexp("(^([0-1][0-9]|2[0-3]):[0-5][0-9]$)|^$")},
+    )
+    sunday_to: str = field(
+        default="",
+        metadata={"validate": Regexp("(^([0-1][0-9]|2[0-3]):[0-5][0-9]$)|^$")},
+    )
+    schedule_notes: str = field(default="")
+
+    @staticmethod
+    def _digits(value: str | None) -> str:
+        return re.sub(r"\D", "", value or "")
+
+    def __post_init__(self):
+        errors = {}
+
+        if not self.phone and not self.email:
+            errors["phone"] = ["Укажите телефон или email."]
+            errors["email"] = ["Укажите телефон или email."]
+        if self.email and not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", self.email):
+            errors["email"] = ["Укажите корректный email."]
+        if self.phone and len(self._digits(self.phone)) < 10:
+            errors["phone"] = ["Укажите корректный телефон."]
+        if self.mobile_phone and len(self._digits(self.mobile_phone)) < 10:
+            errors["mobile_phone"] = ["Укажите корректный мобильный телефон."]
+        if not self.company_name:
+            errors["company_name"] = ["Укажите название компании."]
+
+        for start_field, end_field, label in (
+            ("weekdays_from", "weekdays_to", "пн. — пт"),
+            ("saturday_from", "saturday_to", "сб"),
+            ("sunday_from", "sunday_to", "вс"),
+        ):
+            start = getattr(self, start_field)
+            end = getattr(self, end_field)
+            if start and not end:
+                errors[end_field] = [f"Укажите время окончания для {label}."]
+            if end and not start:
+                errors[start_field] = [f"Укажите время начала для {label}."]
+
+        if errors:
+            raise ValidationError(errors)
 
 
 @dataclass
