@@ -15,12 +15,14 @@ from flora_front_api_client.presentations.orders import (
     AnswerResponse,
     Answer,
     CancelOrderCalculationResponse,
+    OneClickOrderRequest,
 )
 from marshmallow import Schema, EXCLUDE
 
 Schema.Meta.unknown = EXCLUDE
 
 CreateOrderRequestSchema = marshmallow_dataclass.class_schema(CreateOrderRequest)
+OneClickOrderRequestSchema = marshmallow_dataclass.class_schema(OneClickOrderRequest)
 OrderResponseSchema = marshmallow_dataclass.class_schema(OrderResponse)
 OrdersResponseSchema = marshmallow_dataclass.class_schema(OrdersResponse)
 OrderCommentRequestSchema = marshmallow_dataclass.class_schema(OrderCommentRequest)
