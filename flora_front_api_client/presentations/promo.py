@@ -10,6 +10,19 @@ from .enums import PromoTypes, PromoWorkPeriod
 def parse_date(date_str: str) -> datetime:
     return datetime.strptime(date_str, "%d/%m")
 
+
+def _parse_month_day(date_str: str) -> tuple[int, int]:
+    parsed = parse_date(date_str)
+    return parsed.month, parsed.day
+
+
+def _is_within_annual_range(
+    today: tuple[int, int], start: tuple[int, int], end: tuple[int, int]
+) -> bool:
+    if start <= end:
+        return start <= today <= end
+    return today >= start or today <= end
+
 @dataclass
 class PromoCode(BaseDataclass):
     id: int = field(metadata={"strict": True,})
@@ -23,15 +36,20 @@ class PromoCode(BaseDataclass):
     date_end: str | None = field(metadata={"validate": Length(max=15)}, default=None)
 
 
-    def check(self) -> bool:
+    def check(self, now: datetime | None = None) -> bool:
+        if now is None:
+            now = datetime.now()
         if not self.enabled:
             return False
         if self.work_days == "date":
-            if not parse_date(self.date_start) <= datetime.now() <= parse_date(self.date_end):
+            today = (now.month, now.day)
+            start = _parse_month_day(self.date_start)
+            end = _parse_month_day(self.date_end)
+            if not _is_within_annual_range(today, start, end):
                 return False
         elif self.work_days == "week":
             days = list(map(int, self.day_of_week.split(',')))
-            current_day = datetime.now().weekday()
+            current_day = now.weekday()
             return current_day in days
         return True
 
