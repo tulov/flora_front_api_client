@@ -6,7 +6,7 @@ from .cities import Country
 
 
 @dataclass
-class CountryResponse(SuccessResponse):
+class CountryDetailResponse(SuccessResponse):
     result: Country = field()
 
 

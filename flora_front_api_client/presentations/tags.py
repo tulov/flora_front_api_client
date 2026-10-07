@@ -56,13 +56,20 @@ class TagsResponse(PagedResponse):
 
 
 @dataclass
+class TagTreeChild(TagBase):
+    # Дочерний тег в дереве видимых тегов: отдельный тип, чтобы не менять TagBase и Tag.
+    name_en: str | None = field(default=None)
+
+
+@dataclass
 class TagsTreeItem(TagBase):
-    children: list[TagBase] | None = field()
+    children: list[TagTreeChild] | None = field()
 
 @dataclass
 class TagsWithParents(TagsTreeItem):
     parent_id: int = field(metadata={"strict": True})
     name: str = field(metadata={"validate": Length(max=150, min=1)})
+    name_en: str | None = field(default=None)
 
 
 @dataclass

@@ -88,6 +88,15 @@ class Namespace:
     async def _delete(self, url, **kwargs):
         return await self._run_query(url, "delete", **kwargs)
 
+    @staticmethod
+    def with_lang(query_params, lang: str | None):
+        """Добавляет lang к параметрам запроса. Querystring по умолчанию несёт
+        page/per_page, поэтому без lang параметры не трогаем."""
+        if not lang:
+            return query_params
+        params = query_params.as_dict() if query_params else {}
+        return {**params, "lang": lang}
+
     def build_url(
         self,
         query_params: BaseDataclass | dict[str, Any] = None,

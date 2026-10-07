@@ -15,6 +15,7 @@ from ..presentations.bills import (
     BillResponse,
     BillPayRequest,
     BillPDFResponse,
+    BillQuerystring,
 )
 from ..presentations.error import ErrorResponse
 from ..schemas import (
@@ -31,7 +32,7 @@ class BillsNamespace(Namespace):
 
     @expectations(schema=BillResponseSchema)
     async def get(
-        self, guid: str, query_params: WithFieldsQuerystring = None, **kwargs
+        self, guid: str, query_params: BillQuerystring = None, **kwargs
     ) -> (int, BillResponse | ErrorResponse, RenewTokenResponse):
         return await self._get(self.build_url(query_params, postfix_url=guid), **kwargs)
 

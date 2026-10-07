@@ -18,6 +18,7 @@ class MainPageBlock(BaseDataclass):
     enabled: bool = field()
     index: int = field(metadata={"strict": True})
     category_slug: str | None = field(default=None)
+    title_en: str | None = field(default=None, metadata={"validate": Length(max=100)})
 
 
 @dataclass

@@ -17,6 +17,9 @@ class MenuItemBase(BaseDataclass):
     link: str = field(metadata={"validate": Length(max=250)})
     open_in_new_window: bool = field()
     enabled: bool = field()
+    name_en: str | None = field(
+        default=None, metadata={"validate": Length(max=100)}
+    )
 
 
 @dataclass

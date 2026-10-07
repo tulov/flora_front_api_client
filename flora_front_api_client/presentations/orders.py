@@ -91,12 +91,21 @@ class Answer(BaseDataclass):
     name: str | None = field(default=None)
     created_at: datetime = field(default_factory=datetime.utcnow)
     txt: str | None = field(default=None)
+    txt_en: str | None = field(default=None)
+    name_en: str | None = field(default=None)
     is_checked: bool = field(default=False)
     is_publish: bool = field(default=False)
     data: Any = field(default_factory=dict)
     city_id: int | None = field(default=None)
     city: City | None = field(default=None)
     user: User | None = field(default=None)
+
+    def text_by_lang(self, lang: str = "ru") -> str | None:
+        """Текст отзыва: английский при lang=en и заполненном txt_en, иначе русский."""
+        return (self.txt_en or self.txt) if lang == "en" else self.txt
+
+    def name_by_lang(self, lang: str = "ru") -> str | None:
+        return (self.name_en or self.name) if lang == "en" else self.name
 
 
 @dataclass
@@ -142,6 +151,10 @@ class Order(BaseDataclass):
     wishes: str | None = field(default="")
     currency: str | None = field(default="rub")
     currencies: str | None = field(default="")
+    admitad_uid: str | None = field(default=None)
+    admitad_conversion_status: str | None = field(default=None)
+    admitad_conversion_sent_at: int | None = field(default=None)
+    admitad_conversion_error: str | None = field(default=None)
     tech: str | None = field(default=None)
     items: list[OrderData] | None = field(default_factory=list)
     order_invoices: list[Invoice] | None = field(default_factory=list)
@@ -212,6 +225,9 @@ class CreateOrderRequest(BaseDataclass):
     take_photo_with_receiver: bool = field(default=False)
     products: list[OrderProduct] = field(
         default_factory=list, metadata={"required": True}
+    )
+    admitad_uid: str | None = field(
+        default=None, metadata={"validate": Length(max=2048)}
     )
 
 

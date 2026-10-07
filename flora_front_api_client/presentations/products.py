@@ -191,6 +191,9 @@ class FeaturedProductCategory(BaseDataclass):
     )
     slug: str = field(metadata={"validate": Length(max=100, min=1)})
     name_ru: str = field(metadata={"validate": Length(max=50, min=1)}, default=None)
+    name_en: str | None = field(
+        default=None, metadata={"validate": Length(max=50)}
+    )
 
 
 @dataclass
@@ -267,6 +270,7 @@ class FeaturedProductsQuerystring(Querystring):
     currency: str = field(
         metadata={"validate": OneOf([r.value for r in Currency])}, default="rub"
     )
+    lang: str | None = field(default=None)
 
 
 @dataclass
@@ -279,6 +283,7 @@ class IdsFeaturedProductsQuerystring(BaseDataclass):
         metadata={"validate": OneOf([r.value for r in Currency])}, default="rub"
     )
     type: str | None = field
+    lang: str | None = field(default=None)
 
 
 @dataclass
@@ -288,6 +293,7 @@ class PreferredExecutorQuerystring(BaseDataclass):
     currency: str = field(
         metadata={"validate": OneOf([r.value for r in Currency])}, default="rub"
     )
+    lang: str | None = field(default=None)
 
 
 @dataclass

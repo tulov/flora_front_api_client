@@ -17,24 +17,20 @@ class CountriesNamespace(Namespace):
 
     @expectations(schema=CountriesResponseSchema)
     async def all(
-        self, query_params: Querystring = None, **kwargs
+        self, query_params: Querystring = None, *, lang: str = None, **kwargs
     ) -> (int, Union[CountryResponse, ErrorResponse],
           RenewTokenResponse):
-        return await self._get(self.build_url(query_params), **kwargs)
-
-    @expectations(schema=SearchCountriesResponseSchema)
-    async def search(
-        self, term: str = None, **kwargs
-    ) -> (int, Union[SearchCountryResponse, ErrorResponse], RenewTokenResponse):
         return await self._get(
-            self.build_url(postfix_url=f'search/{term}'), **kwargs
+            self.build_url(self.with_lang(query_params, lang)), **kwargs
         )
 
-
     @expectations(schema=SearchCountriesResponseSchema)
     async def search(
-        self, term: str = None, **kwargs
+        self, term: str = None, lang: str = None, **kwargs
     ) -> (int, Union[SearchCountryResponse, ErrorResponse], RenewTokenResponse):
         return await self._get(
-            self.build_url(postfix_url=f'search/{term}'), **kwargs
+            self.build_url(
+                {"lang": lang} if lang else None, postfix_url=f'search/{term}'
+            ),
+            **kwargs,
         )

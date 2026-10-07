@@ -18,17 +18,22 @@ class CitiesNamespace(Namespace):
 
     @expectations(schema=CitiesResponseSchema)
     async def all(
-        self, query_params: Querystring = None, **kwargs
+        self, query_params: Querystring = None, *, lang: str = None, **kwargs
     ) -> (int, Union[CitiesResponse, ErrorResponse],
           RenewTokenResponse):
-        return await self._get(self.build_url(query_params), **kwargs)
+        return await self._get(
+            self.build_url(self.with_lang(query_params, lang)), **kwargs
+        )
 
     @expectations(schema=SearchCitiesResponseSchema)
     async def search(
-        self, term: str = None, **kwargs
+        self, term: str = None, lang: str = None, **kwargs
     ) -> (int, Union[SearchCitiesResponse, ErrorResponse], RenewTokenResponse):
         return await self._get(
-            self.build_url(postfix_url=f'search/{term}'), **kwargs
+            self.build_url(
+                {"lang": lang} if lang else None, postfix_url=f'search/{term}'
+            ),
+            **kwargs,
         )
 
     @expectations(schema=CityResponseSchema)

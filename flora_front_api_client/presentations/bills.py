@@ -5,7 +5,7 @@ from typing import Any
 
 from marshmallow.validate import Length
 
-from .base import SuccessResponse, BaseDataclass, PagedResponse
+from .base import SuccessResponse, BaseDataclass, PagedResponse, WithFieldsQuerystring
 from .images import Image
 
 
@@ -126,3 +126,8 @@ class PayRussianFederationBillQuerystring(BaseDataclass):
     )  # идентификатор операции на стороне paygine
     reference: int | None = field(default=None)  # идентификатор заказа на стороне флоры
     error: int | None = field(default=None)  # номер ошибки, если она возникла
+
+
+@dataclass
+class BillQuerystring(WithFieldsQuerystring):
+    lang: str | None = field(default=None)
