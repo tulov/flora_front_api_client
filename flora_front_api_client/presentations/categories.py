@@ -84,3 +84,6 @@ class FilterCounterRequest(BaseDataclass):
     )
     selected: list[int] = field(default_factory=list, metadata={"required": True})
     ids: list[int] = field(default_factory=list, metadata={"required": True})
+    # поиск по сайту: счётчики считаются среди найденных товаров
+    term: str | None = field(default=None)
+    lang: str = field(default="ru", metadata={"validate": OneOf(["ru", "en"])})

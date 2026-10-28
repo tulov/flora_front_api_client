@@ -6,8 +6,13 @@ from ..presentations.error import ErrorResponse
 from ..presentations.full_text_search import (
     ProductFullTextSearchRequest,
     ProductFullTextSearchResponse,
+    SiteFullTextSearchRequest,
+    SiteFullTextSearchResponse,
 )
-from ..schemas.full_text_search import ProductFullTextSearchResponseSchema
+from ..schemas.full_text_search import (
+    ProductFullTextSearchResponseSchema,
+    SiteFullTextSearchResponseSchema,
+)
 
 
 class FullTextSearchNamespace(Namespace):
@@ -22,6 +27,17 @@ class FullTextSearchNamespace(Namespace):
     ) -> (int, ProductFullTextSearchResponse | ErrorResponse, RenewTokenResponse):
         return await self._post(
             self.build_url(query_params, postfix_url="products/"),
+            json=data.as_dict(),
+            **kwargs
+        )
+
+    @expectations(schema=SiteFullTextSearchResponseSchema)
+    async def site(
+        self, data: SiteFullTextSearchRequest, **kwargs
+    ) -> (int, SiteFullTextSearchResponse | ErrorResponse, RenewTokenResponse):
+        """Категории каталога и текстовые страницы."""
+        return await self._post(
+            self.build_url(None, postfix_url="site/"),
             json=data.as_dict(),
             **kwargs
         )
